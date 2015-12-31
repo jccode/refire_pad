@@ -1,0 +1,32 @@
+<ion-view view-title="HOME">
+    <ion-content class="home" >
+        
+        <ks-swiper-container initial-slide="0" loop="true" show-nav-buttons="false" slides-per-view="1" space-between="5" pagination-clickable="false" on-ready="ctrl.onReadySwiper(swiper)">
+            <ks-swiper-slide class="swiper-slide myslide">
+                    <video controls autoplay>
+                        <source src="img/video/energyflow_hd.mp4" type="video/mp4">
+                    </video>
+            </ks-swiper-slide>
+
+            <ks-swiper-slide class="swiper-slide myslide">
+                    <video controls >
+                        <source src="img/video/fuelcell_hd.mp4" type="video/mp4">
+                    </video>
+            </ks-swiper-slide>
+
+            <ks-swiper-slide class="swiper-slide myslide">
+                <div ng-include src="'templates/energy.html'"></div>
+            </ks-swiper-slide>
+            
+            <ks-swiper-slide class="swiper-slide myslide">
+                <div ng-include src="'templates/tree.html'"></div>
+            </ks-swiper-slide>
+
+            <ks-swiper-slide class="swiper-slide myslide">
+                <img src="img/QR-page.png" alt="" width="100%" />
+            </ks-swiper-slide>
+            
+        </ks-swiper-container>
+        
+    </ion-content>
+</ion-view>

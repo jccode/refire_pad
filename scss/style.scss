@@ -1,0 +1,18 @@
+
+@import "www/lib/sass-css3-mixins/css3-mixins.scss";
+@import "www/lib/sass-mq/_mq.scss";
+@import "_my_mixin.scss";
+
+@import "_mq_setting.scss";
+
+@import "efdashboard.scss";
+@import "tree.scss";
+
+
+.home {
+    background: #fff;
+
+    video {
+        
+    }
+}

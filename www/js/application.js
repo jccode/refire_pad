@@ -1,5 +1,5 @@
 (function() {
-  angular.module('app', ['ionic']);
+  angular.module('app', ['ionic', 'ksSwiper']);
 
 }).call(this);
 
@@ -75,6 +75,13 @@
             controller: 'HomeCtrl as ctrl'
           }
         }
+      }).state('app.tree', {
+        url: '/tree',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/tree.html'
+          }
+        }
       });
       $urlRouterProvider.otherwise('/app/home');
     }
@@ -124,16 +131,79 @@
   var HomeCtrl;
 
   HomeCtrl = (function() {
-    function HomeCtrl($scope) {
+    function HomeCtrl($scope, $timeout) {
       this.$scope = $scope;
-      console.log('home');
+      this.$timeout = $timeout;
+      this.DELAY = 10;
+      this.active = 0;
+      this.video1 = document.getElementById("video1");
+      this.video2 = document.getElementById("video2");
+      window.v1 = this.video1;
+      window.v2 = this.video2;
+      this.video1.addEventListener('ended', this.video_end_listener.bind(this), false);
+      this.video2.addEventListener('ended', this.video_end_listener.bind(this), false);
+      this.active_handler(this.active);
     }
+
+    HomeCtrl.prototype.video_end_listener = function() {
+      return this.incr_active();
+    };
+
+    HomeCtrl.prototype.incr_active = function() {
+      this.active = (this.active + 1) % 5;
+      this.$scope.$apply();
+      return this.active_handler(this.active);
+    };
+
+    HomeCtrl.prototype.active_handler = function(idx) {
+      switch (idx) {
+        case 0:
+          return this.play_video(this.video1);
+        case 1:
+          return this.play_video(this.video2);
+        case 2:
+          return this.delay_and_next();
+        case 3:
+          return this.delay_and_next();
+        case 4:
+          return this.delay_and_next();
+        default:
+          return console.log('fuck. Should not be in here.');
+      }
+    };
+
+    HomeCtrl.prototype.delay_and_next = function() {
+      return this.$timeout(this.incr_active.bind(this), this.DELAY * 1000);
+    };
+
+    HomeCtrl.prototype.play_video = function(video) {
+      var err, error;
+      try {
+        this.video_full_screen(video);
+      } catch (error) {
+        err = error;
+        console.log(err);
+      }
+      return video.play();
+    };
+
+    HomeCtrl.prototype.video_full_screen = function(elem) {
+      if (elem.requestFullscreen) {
+        return elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) {
+        return elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) {
+        return elem.webkitRequestFullscreen();
+      } else {
+        return console.log('fullscreen api not support');
+      }
+    };
 
     return HomeCtrl;
 
   })();
 
-  angular.module('app').controller('HomeCtrl', ['$scope', HomeCtrl]);
+  angular.module('app').controller('HomeCtrl', ['$scope', '$timeout', HomeCtrl]);
 
 }).call(this);
 
@@ -184,5 +254,23 @@
   })();
 
   angular.module('app').controller('PlaylistCtrl', ['$scope', '$stateParams', PlaylistCtrl]);
+
+}).call(this);
+
+(function() {
+  var TrustedFilter;
+
+  TrustedFilter = (function() {
+    function TrustedFilter($sce) {
+      return function(url) {
+        return $sce.trustAsResourceUrl(url);
+      };
+    }
+
+    return TrustedFilter;
+
+  })();
+
+  angular.module('app').filter('trusted', ['$sce', TrustedFilter]);
 
 }).call(this);

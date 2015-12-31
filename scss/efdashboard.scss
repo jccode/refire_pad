@@ -1,0 +1,274 @@
+
+@import "www/lib/sass-css3-mixins/css3-mixins.scss";
+@import "www/lib/sass-mq/_mq.scss";
+
+@import "_mq_setting.scss";
+
+.ef-dashboard {
+    position: relative;
+    /* background: #000; */
+    
+    $width-bg: 1080px;
+    $height-main: 648px;
+    $height-head: 104px;
+    $height-footer: 78px;
+    
+    $width-footer-left: 199px;
+    $height-footer-left: 115px;
+
+    $width-gear: 137px;
+    $height-gear: 360px;
+
+    $width-battery-e: 105px/2;
+    $height-battery-e: 196px/2;
+    $left-battery-e: 210px;
+    $top-battery-e: -49px;
+
+    $width-battery-h: 105px/2;
+    $height-battery-h: 196px/2;
+    $left-battery-h: 100px;
+    $top-battery-h: -49px;
+
+    $width-arrow: 9px;
+    $height-arrow: 11px;
+    
+    $left-arrow-h0: 125px;
+    $top-arrow-h0: 50px;
+    $left-arrow-h1: 125px;
+    $top-arrow-h1: 95px;        /* rotateZ(90deg)*/
+    $left-arrow-h2: 0px;
+    $top-arrow-h2: 110px;
+
+    $left-arrow-e0: 232px;
+    $top-arrow-e0: 50px;
+    $left-arrow-e1: 232px;
+    $top-arrow-e1: 87px;
+    $left-arrow-e2: 0px;
+    $top-arrow-e2: 110px;
+
+    .bg {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        
+        .head {
+            width: 100%;
+            height: $height-head;
+            background: url("../img/engineflow/menu-bar-top.png") repeat-x center center;
+        }
+        .main {
+            width: 100%;
+            height: $height-main;
+            background: #000;
+        }
+        .footer {
+            width: 100%;
+            height: $height-footer;
+            background: url("../img/engineflow/menu-bar-bottom.png") repeat-x center center;
+        }
+    }
+
+    // normal, 1080
+    .main {
+        background: url("../img/engineflow/background.jpg") no-repeat center center;
+        width: 100%;
+        height: $height-main;
+        position: relative;
+    }
+    .head {
+        background: url("../img/engineflow/menu-bar-top.png") no-repeat center center;
+        width: 100%;
+        height: $height-head;
+    }
+    .footer {
+        background: url("../img/engineflow/menu-bar-bottom.png") no-repeat center center;
+        width: 100%;
+        height: $height-footer;
+        position: relative;
+    }
+    .footer-left {
+        background: url("../img/engineflow/menu-bar-bottom-left.png") no-repeat center left;
+        width: $width-footer-left;
+        height: $height-footer-left;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        margin-left: - $width-bg/2;
+    }
+    .gear {
+        background: url("../img/engineflow/gear-D.png") no-repeat center right;
+        width: $width-gear;
+        height: $height-gear;
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        margin-top: - $height-gear/2;
+        margin-right: - $width-bg/2;
+    }
+    .battery-e {
+        background: url("../img/engineflow/battery-e-20.png") no-repeat center center;
+        background-size: cover;
+        width: $width-battery-e;
+        height: $height-battery-e;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: $top-battery-e;
+        margin-left: $left-battery-e;
+    }
+    .battery-h {
+        background: url("../img/engineflow/battery-h-90.png") no-repeat center center;
+        background-size: cover;
+        width: $width-battery-h;
+        height: $height-battery-h;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: $left-battery-h;
+        margin-top: $top-battery-h;
+    }
+    .flow-h, .flow-h2, .flow-e, .flow-e2 {
+        background: url("../img/engineflow/arrow.png") no-repeat center center;
+        position: absolute;
+        width: $width-arrow;
+        height: $height-arrow;
+        top: 50%;
+        left: 50%;
+        
+    }
+    .flow-h, .flow-h2 {
+        margin-left: $left-arrow-h0;
+        margin-top: $top-arrow-h0;
+        @include animation(flow-h 2s infinite);
+    }
+    .flow-e, .flow-e2 {
+        margin-left: $left-arrow-e0;
+        margin-top: $top-arrow-e0;
+        @include animation(flow-e 2s infinite);
+    }
+    .flow-h2, .flow-e2 {
+        @include css3-prefix('animation-delay', .2s);
+    }
+    
+    // animation
+    @include keyframes(flow-h) {
+        0% { margin-left: $left-arrow-h0; margin-top: $top-arrow-h0; }
+        33% {margin-left: $left-arrow-h1; margin-top: $top-arrow-h1; transform: rotateZ(0);}
+        35% {transform: rotateZ(90deg);}
+        100% {margin-left: $left-arrow-h2; margin-top: $top-arrow-h2; transform: rotateZ(90deg);}
+    }
+
+    @include keyframes(flow-e) {
+        0% {margin-left: $left-arrow-e0; margin-top: $top-arrow-e0;}
+        33% {margin-left: $left-arrow-e1; margin-top: $top-arrow-e1; transform: rotateZ(0);}
+        35% {transform: rotateZ(90deg);}
+        100% {margin-left: $left-arrow-e2; margin-top: $top-arrow-e2; transform: rotateZ(90deg);}
+    }
+
+
+    @mixin scale($factor) {
+        .main {
+            background-size: $width-bg*$factor $height-main*$factor;
+            height: $height-main*$factor;
+        }
+        .head {
+            background-size: $width-bg*$factor $height-head*$factor;
+            height: $height-head*$factor;
+        }
+        .footer {
+            background-size: $width-bg*$factor $height-footer*$factor;
+            height: $height-footer*$factor;
+        }
+        .footer-left {
+            background-size: $width-footer-left*$factor $height-footer-left*$factor;
+            height: $height-footer-left*$factor;
+            margin-left: - $width-bg*$factor / 2;
+        }
+        .gear {
+            background-size: $width-gear*$factor $height-gear*$factor;
+            height: $height-gear*$factor;
+            margin-top: - $height-gear*$factor/2;
+            margin-right: - $width-bg*$factor/2;
+        }
+        .battery-e {
+            width: $width-battery-e*$factor;
+            height: $height-battery-e*$factor;
+            margin-top: $top-battery-e*$factor;
+            margin-left: $left-battery-e*$factor;
+        }
+        .battery-h {
+            width: $width-battery-h*$factor;
+            height: $height-battery-h*$factor;
+            margin-top: $top-battery-h*$factor;
+            margin-left: $left-battery-h*$factor;
+        }
+
+        .bg {
+            .head {
+                height: $height-head*$factor;
+            }
+            .main {
+                height: $height-main*$factor;
+            }
+            .footer {
+                height: $height-footer*$factor;
+            }
+        }
+
+        .flow-h, .flow-h2, .flow-e, .flow-e2 {
+            width: $width-arrow*$factor;
+            height: $height-arrow*$factor;
+        }
+
+        // scale 0.6
+        @include keyframes(flow-h_#{str-slice(to-string($factor),3)}) {
+            0% { margin-left: $left-arrow-h0*$factor; margin-top: $top-arrow-h0*$factor; }
+            33% {margin-left: $left-arrow-h1*$factor; margin-top: $top-arrow-h1*$factor; transform: rotateZ(0);}
+            35% {transform: rotateZ(90deg);}
+            100% {margin-left: $left-arrow-h2*$factor; margin-top: $top-arrow-h2*$factor; transform: rotateZ(90deg);}
+        }
+
+        @include keyframes(flow-e_#{str-slice(to-string($factor),3)}) {
+            0% {margin-left: $left-arrow-e0*$factor; margin-top: $top-arrow-e0*$factor;}
+            33% {margin-left: $left-arrow-e1*$factor; margin-top: $top-arrow-e1*$factor; transform: rotateZ(0);}
+            35% {transform: rotateZ(90deg);}
+            100% {margin-left: $left-arrow-e2*$factor; margin-top: $top-arrow-e2*$factor; transform: rotateZ(90deg);}
+        }
+        .flow-h, .flow-h2 {
+            margin-left: $left-arrow-h0*$factor;
+            margin-top: $top-arrow-h0*$factor;
+            @include animation(flow-h_#{str-slice(to-string($factor),3)} 2s infinite);
+        }
+        .flow-e, .flow-e2 {
+            margin-left: $left-arrow-e0*$factor;
+            margin-top: $top-arrow-e0*$factor;
+            @include animation(flow-e_#{str-slice(to-string($factor),3)} 2s infinite);
+        }
+        .flow-h2, .flow-e2 {
+            @include css3-prefix('animation-delay', .2s);
+        }
+    }
+
+    // narrow phone (<400), iphone4,5,6
+    @include mq($until: mobileExtra) {
+        @include scale(0.5)
+    }
+
+    // bigger phone (>400), iphone 6+
+    @include mq(mobileExtra, tablet) {
+        @include scale(0.6)
+    }
+
+
+    // big screen
+    @include mq($from: wide) {
+        .footer-left {
+            margin-left: 0;
+            left: 0;
+        }
+    }
+}
+
+

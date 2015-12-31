@@ -1,5 +1,29 @@
 <ion-view view-title="HOME">
-  <ion-content>
-    <h1>home</h1>
-  </ion-content>
+    <ion-content class="home" >
+
+        <!-- <div class="video-player" > -->
+        <!-- </div> -->
+            <video id="video1" controls ng-show="ctrl.active==0">
+                <source src="img/video/energyflow_hd.mp4" type="video/mp4"/>
+            </video>
+
+        <!-- <div class="video-player" ng-show="ctrl.active==1"> -->
+        <!-- </div> -->
+            <video id="video2" controls ng-show="ctrl.active==1">
+                <source src="img/video/fuelcell_hd.mp4" type="video/mp4"/>
+            </video>
+
+        <div class="energy-flow" ng-show="ctrl.active==2">
+            <div ng-include src="'templates/energy.html'"></div>
+        </div>
+
+        <div class="tree" ng-show="ctrl.active==3">
+            <div ng-include src="'templates/tree.html'"></div>
+        </div>
+
+        <div class="qrcode" ng-show="ctrl.active==4">
+            <img src="img/QR-page.png" alt="" width="100%" />
+        </div>
+            
+    </ion-content>
 </ion-view>

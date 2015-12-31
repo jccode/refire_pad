@@ -1,0 +1,46 @@
+
+@mixin circle($diameter) {
+    width: $diameter;
+    height: $diameter;
+    @include border-radius($diameter);
+}
+
+@mixin border-gradient($startColor: #3C3C3C, $endColor: #999999) {
+    border-color: $startColor;
+    border-image: -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor));
+    border-image: -webkit-linear-gradient(top, $startColor, $endColor);
+    border-image:    -moz-linear-gradient(top, $startColor, $endColor);
+    border-image:     -ms-linear-gradient(top, $startColor, $endColor);
+    border-image:      -o-linear-gradient(top, $startColor, $endColor);
+    border-image:         linear-gradient(top, $startColor, $endColor);
+    filter:            progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}');
+}
+
+// ========================================
+
+@function calculateRem($size) {
+    $remSize: $size / 16px;
+    @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+    font-size: $size;
+    font-size: calculateRem($size);
+}
+
+@function to-string($value) {
+  @return inspect($value);
+}
+
+@mixin clearfix {
+    *zoom: 1;
+    &:before,
+    &:after {
+        display: table;
+        content: "";
+        line-height: 0;
+    }
+    &:after {
+        clear: both;
+    }
+}

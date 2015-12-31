@@ -3,5 +3,11 @@
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.1.1"
+  },
+  "dependencies": {
+    "sass-css3-mixins": "*",
+    "sass-mq": "~3.2.5",
+    "Swiper": "swiper#~3.2.7",
+    "angular-swiper": "~0.3.2"
   }
 }

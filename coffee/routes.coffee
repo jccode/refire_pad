@@ -41,6 +41,12 @@ class Config
 						templateUrl: 'templates/home.html'
 						controller: 'HomeCtrl as ctrl'
 
+			.state 'app.tree',
+				url: '/tree'
+				views:
+					'menuContent':
+						templateUrl: 'templates/tree.html'
+
 
 		$urlRouterProvider.otherwise '/app/home'
 
