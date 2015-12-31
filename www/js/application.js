@@ -134,12 +134,10 @@
     function HomeCtrl($scope, $timeout) {
       this.$scope = $scope;
       this.$timeout = $timeout;
-      this.DELAY = 10;
+      this.DELAY = 20;
       this.active = 0;
       this.video1 = document.getElementById("video1");
       this.video2 = document.getElementById("video2");
-      window.v1 = this.video1;
-      window.v2 = this.video2;
       this.video1.addEventListener('ended', this.video_end_listener.bind(this), false);
       this.video2.addEventListener('ended', this.video_end_listener.bind(this), false);
       this.active_handler(this.active);

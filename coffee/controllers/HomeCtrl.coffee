@@ -1,12 +1,12 @@
 
 class HomeCtrl
 	constructor: (@$scope, @$timeout)->
-		@DELAY = 10
+		@DELAY = 20
 		@active = 0
 		@video1 = document.getElementById "video1"
 		@video2 = document.getElementById "video2"
-		window.v1 = @video1
-		window.v2 = @video2
+		# window.v1 = @video1
+		# window.v2 = @video2
 
 		@video1.addEventListener 'ended', @video_end_listener.bind(@), false
 		@video2.addEventListener 'ended', @video_end_listener.bind(@), false
