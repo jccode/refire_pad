@@ -17,11 +17,15 @@
             <div ng-include src="'templates/energy.html'"></div>
         </div>
 
-        <div class="tree" ng-show="ctrl.active==3">
+        <video id="video3" controls ng-show="ctrl.active==3">
+            <source src="img/video/zero_emission_hd.mp4" type="video/mp4"/>
+        </video>
+
+        <div class="tree" ng-show="ctrl.active==4">
             <div ng-include src="'templates/tree.html'"></div>
         </div>
 
-        <div class="qrcode" ng-show="ctrl.active==4">
+        <div class="qrcode" ng-show="ctrl.active==5">
             <img src="img/QR-page.png" alt="" width="100%" />
         </div>
             

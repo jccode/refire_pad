@@ -5,11 +5,13 @@ class HomeCtrl
 		@active = 0
 		@video1 = document.getElementById "video1"
 		@video2 = document.getElementById "video2"
+		@video3 = document.getElementById "video3"
 		# window.v1 = @video1
 		# window.v2 = @video2
 
 		@video1.addEventListener 'ended', @video_end_listener.bind(@), false
 		@video2.addEventListener 'ended', @video_end_listener.bind(@), false
+		@video3.addEventListener 'ended', @video_end_listener.bind(@), false
 
 		@active_handler(@active)
 
@@ -27,9 +29,10 @@ class HomeCtrl
 			when 0 then @play_video(@video1)
 			when 1 then @play_video(@video2)
 			when 2 then @delay_and_next()
-			when 3 then @delay_and_next()
+			when 3 then @play_video(@video3)
 			when 4 then @delay_and_next()
-			else console.log 'fuck. Should not be in here.'
+			when 5 then @delay_and_next()
+			else console.log 'fuck. Should not in here.'
 
 	delay_and_next: ()->
 		@$timeout @incr_active.bind(@), @DELAY*1000

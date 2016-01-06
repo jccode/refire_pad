@@ -138,8 +138,10 @@
       this.active = 0;
       this.video1 = document.getElementById("video1");
       this.video2 = document.getElementById("video2");
+      this.video3 = document.getElementById("video3");
       this.video1.addEventListener('ended', this.video_end_listener.bind(this), false);
       this.video2.addEventListener('ended', this.video_end_listener.bind(this), false);
+      this.video3.addEventListener('ended', this.video_end_listener.bind(this), false);
       this.active_handler(this.active);
     }
 
@@ -162,11 +164,13 @@
         case 2:
           return this.delay_and_next();
         case 3:
-          return this.delay_and_next();
+          return this.play_video(this.video3);
         case 4:
           return this.delay_and_next();
+        case 5:
+          return this.delay_and_next();
         default:
-          return console.log('fuck. Should not be in here.');
+          return console.log('fuck. Should not in here.');
       }
     };
 
