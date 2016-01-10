@@ -1,13 +1,11 @@
 
 class HomeCtrl
-	constructor: (@$scope, @$timeout)->
+	constructor: (@$rootScope, @$scope, @$timeout)->
 		@DELAY = 20
 		@active = 0
 		@video1 = document.getElementById "video1"
 		@video2 = document.getElementById "video2"
 		@video3 = document.getElementById "video3"
-		# window.v1 = @video1
-		# window.v2 = @video2
 
 		@video1.addEventListener 'ended', @video_end_listener.bind(@), false
 		@video2.addEventListener 'ended', @video_end_listener.bind(@), false
@@ -22,6 +20,7 @@ class HomeCtrl
 		@active = (@active + 1) % 5
 		@$scope.$apply()
 		@active_handler @active
+		@$rootScope.$broadcast 'activeChanged', @active
 
 	active_handler: (idx)->
 		# console.log "active handler #{idx} "
@@ -55,4 +54,4 @@ class HomeCtrl
 			console.log 'fullscreen api not support'
 
 
-angular.module('app').controller 'HomeCtrl', ['$scope', '$timeout', HomeCtrl]
+angular.module('app').controller 'HomeCtrl', ['$rootScope', '$scope', '$timeout', HomeCtrl]

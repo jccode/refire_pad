@@ -11,6 +11,7 @@
     transform: translateY(-50%);
 }
 
+/*
 .save-trees {
 
     h1 {
@@ -28,8 +29,6 @@
         $tree-height: 172px;
 
         position: relative;
-        /* height: $tree-height; */
-        /* margin-bottom: 21px; */
         padding: 21px 15px;
         @include background-gradient(#f3f3f3, #e0e0e0);
 
@@ -83,8 +82,6 @@
             }
         }
         .desc {
-            /* position: absolute; */
-            /* float: right; */
             margin-left: $axis-width + $tree-width;
             height: $tree-height;
             text-align: center;
@@ -148,12 +145,11 @@
         p {
             padding: 15px 5px;
             background: #f2f3f3;
-            /* font-size: 10px; */
         }
     }
 
 
-    /* responsive */
+    // responsive 
 
     @mixin tree-rsp($factor) {
         $axis-width: 27px;
@@ -238,54 +234,122 @@
         @include tree-rsp(4);
     }
     
-    /* 
-    @include mq(mobileLandscape, tablet) {
-        $axis-width-1: 27px;
-        $tree-width-1: 300px;
-        $tree-height-1: 271px;
-        $forest-img-width-1: 150px;
-        $forest-img-height-1: 111px;
+}
+*/
 
-        .tree-container {
-            .axis .middle {
-                top: $tree-height-1 / 2;
-            }
-            .tree {
-                margin-left: $axis-width-1;
-                width: $tree-width-1;
-                .bg {
-                    width: $tree-width-1 - 14;
-                }
-                img {
-                    width: $tree-width-1;
-                    height: $tree-height-1;
-                }
-            }
-            .desc {
-                margin-left: $axis-width-1 + $tree-width-1;
-                height: $tree-height-1;
-                .top {
-                    height: $tree-height-1 * 0.3;
-                }
-                .middle {
-                    height: $tree-height-1 * 0.5;
-                }
-                .bottom {
-                    height: $tree-height-1 * 0.2;
-                }
-            }
-        }
-        .statement .help-us {
-            height: $forest-img-height-1;
+.cover {
+    margin: 0 auto;
+}
+
+.save-trees {
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 1%;
+
+    h1 {
+        height: 10%;
+        text-align: center;
+        margin: 0;
+        padding: 1%;
+    }
+    .tree-container {
+        height: 60%;
+        padding: 3% 0;
+        position: relative;
+    }
+    .statement {
+        height: 24%;
+        margin: 2% 0;
+        background: #fff;
+        
+        .help-us {
+            height: 100%;
+            @include clearfix;
+            @include background-gradient(#92cff8, #f2f3f3);
+
             img {
-                width: $forest-img-width-1;
+                height: 100%;
+                float: left;
+                margin-right: 2%;
             }
-            .text {
-                margin-left: $forest-img-width-1;
-                height: $forest-img-height-1;
+            p {
+                font-size: 100%;
             }
         }
     }
-     */
-
+    .tree-container {
+        overflow: hidden;
+        
+        .axis, .tree, .desc {
+            height: 100%;
+        }
+        .axis {
+            float: left;
+            height: 90%;
+        }
+        .desc {
+            height: 97%;
+        }
+        
+        .axis {
+            position: absolute;
+            width: 9%;
+            background: #e8e8e8;
+            
+            span {
+                position: absolute;
+                right: 5px;
+            }
+            .baseline {
+                bottom: 2%;
+            }
+            .middle {
+                top: 45%;
+            }
+            .top {
+                top: 0;
+            }
+        }
+        
+        .tree {
+            float: left;
+            margin-left: 9%;
+            background: #fff;
+            position: relative;
+            
+            .bg {
+                background: #8eba76;
+                position: absolute;
+                height: 80px;
+                width: 90%;
+                bottom: 8px;
+                left: 14px;
+                z-index: 1;
+                margin: 0 3%;
+            }
+            img {
+                position: relative;
+                height: 100%;
+                z-index: 2;
+            }
+        }
+        
+        .desc {
+            text-align: center;
+            
+            .top {
+                height: 35%;
+                @include background-gradient(#93cff8, #f4f4f5);
+            }
+            .middle {
+                height: 40%;
+                @include background-gradient(#e1e18f, #e6e6e6);
+            }
+            .bottom {
+                height: 25%;
+                background: #45aff7;
+            }
+        }
+    }
+    
 }

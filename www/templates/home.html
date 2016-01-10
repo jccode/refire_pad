@@ -1,27 +1,27 @@
 <ion-view view-title="HOME">
     <ion-content class="home" >
 
-        <!-- <div class="video-player" > -->
-        <!-- </div> -->
-            <video id="video1" controls ng-show="ctrl.active==0">
+        <div class="video-player" ng-show="ctrl.active==0" data-tap-disabled="true">
+            <video id="video1" controls >
                 <source src="img/video/energyflow_hd.mp4" type="video/mp4"/>
             </video>
+        </div>
 
-        <!-- <div class="video-player" ng-show="ctrl.active==1"> -->
-        <!-- </div> -->
-            <video id="video2" controls ng-show="ctrl.active==1">
+        <div class="video-player" ng-show="ctrl.active==1" data-tap-disabled="true">
+            <video id="video2" controls > <!-- ng-show="ctrl.active==1" -->
                 <source src="img/video/fuelcell_hd.mp4" type="video/mp4"/>
             </video>
+        </div>
 
         <div class="energy-flow" ng-show="ctrl.active==2">
-            <div ng-include src="'templates/energy.html'"></div>
+            <div ng-include src="'templates/energy2.html'"></div>
         </div>
 
         <video id="video3" controls ng-show="ctrl.active==3">
             <source src="img/video/zero_emission_hd.mp4" type="video/mp4"/>
         </video>
 
-        <div class="tree" ng-show="ctrl.active==4">
+        <div class="tree" ng-show="ctrl.active==4" id="tree-section">
             <div ng-include src="'templates/tree.html'"></div>
         </div>
 

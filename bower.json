@@ -8,6 +8,13 @@
     "sass-css3-mixins": "*",
     "sass-mq": "~3.2.5",
     "Swiper": "swiper#~3.2.7",
-    "angular-swiper": "~0.3.2"
+    "angular-swiper": "~0.3.2",
+    "ngCordova": "~0.1.23-alpha",
+    "angular-gettext": "~2.2.0",
+    "angular-resource": "~1.4.8",
+    "ngstorage": "~0.3.10",
+    "angular-base64": "~2.0.5",
+    "angular-cookies": "~1.4.8",
+    "underscore": "~1.8.3"
   }
 }

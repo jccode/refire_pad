@@ -1,8 +1,8 @@
 
-<div class="save-trees">
+<div class="save-trees" cover='{"width":"1000px", "font-size":"30px"}' ng-controller="TreeCtrl as ctrl">
 
 
-<h1>This Hydrogen Bus Excretes Water</h1>
+<h1 translate>This Hydrogen Bus Excretes Water</h1>
 
 <div class="tree-container">
     <div class="axis">
@@ -10,21 +10,23 @@
         <span class="middle">10KM</span>
         <span class="top">20KM</span>
     </div>
+        
     <div class="tree">
-        <div class="bg"> </div>
-        <img src="img/tree.png" alt="" />
-    </div>
+        <div class="bg" id="bg"> </div>
+        <img src="img/tree.png" alt="" id="tree"/>
+        </div>
+
     <div class="desc">
-        <div class="top"> <div class="valign">The bus saved</div> </div>
+        <div class="top"> <div class="valign" translate>The bus saved</div> </div>
         <div class="middle">
             <div class="valign">
-                <h2>4</h2>
-                <p>Trees</p>
+                <h2>{{tree}}</h2>
+                <p translate>Trees</p>
             </div>
         </div>
         <div class="bottom">
-            <div class="valign">
-                compare to a <br/> traditional bus
+            <div class="valign" translate>
+                compare to a traditional bus
             </div>
         </div>
     </div>
@@ -33,11 +35,14 @@
 <div class="statement">
     <div class="help-us">
         <img src="img/thumb-trees-2.jpg" alt="" />
+        <!-- 
         <div class="text">
-            <div class="valign">
+            <div class="valign" translate>
                 Help us to create a better enviroment for the future of our child
             </div>
-        </div>
+            </div>
+        -->
+        <p class="valign" translate>Help us to create a better enviroment for the future of our child</p>
     </div>
     <!-- <p>Lorern ipsum dotor sit amnet,...</p> -->
 </div>

@@ -6,6 +6,7 @@
 @import "_mq_setting.scss";
 
 @import "efdashboard.scss";
+@import "endashboard.scss";
 @import "tree.scss";
 
 
@@ -13,9 +14,12 @@
     background: #fff;
 
     video {
-        /* width: 100%; */
         display: block;
         margin: 0 auto;
-        width: auto;
+        width: 100%;
+    }
+
+    .tree {
+        @include background-gradient(#f3f3f3, #e0e0e0);
     }
 }

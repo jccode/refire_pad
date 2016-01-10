@@ -1,0 +1,62 @@
+
+<!--
+<ion-view view-title="abc">
+    <ion-content class="message-detail">
+ -->
+
+
+
+<div class="energy2" ng-controller="EnergyFlowCtrl as ctrl">
+    <!-- 
+    <div class="demo-tips" ng-show="ctrl.demodata" translate>
+        Demo data. To view the real data when you take our bus.
+    </div>
+    -->
+    
+    <div class="endashboard">
+        <div class="head">
+            <img src="img/engineflow/menu-bar-top.png" alt="" class="full"/>
+            <div class="title" scale-font='{"width":"200px","line-height":"87px"}' ng-show="ctrl.data">
+                <translate>Available Mileage</translate> &nbsp;&nbsp; {{ctrl.data.MileageData.remain}} KM
+            </div>
+        </div>
+        <div class="main" id="main">
+            <img src="img/engineflow/TOP-1044-no-fuel.png" alt="" class="full"/>
+            <img ng-src="{{gif_src}}" alt="" class="full"/> <!-- img/engineflow/GIF-1044-H-and-E.gif -->
+            <div class="batterys" id="batterys" efbattery >
+                
+                <div class="battery-container">
+                    <div class="text">
+                        <p translate>FUEL CELL</p>
+                        <p ng-show="ctrl.data">{{ctrl.data.GasData.remain}}%  &nbsp;&nbsp;  {{ctrl.data.GasData.bottle_temp}}&#8451;</p>
+                    </div>
+                    <img ng-src="{{fuel_cell_src}}" alt="" /> <!-- img/engineflow/battery-h-90.png -->
+                </div>
+                
+                <div class="battery-container">
+                    <div class="text">
+                        <p translate>BATTERY</p>
+                        <p ng-show="ctrl.data">{{ctrl.data.PowerBatteryData.remain}}%  &nbsp;&nbsp;  {{ctrl.data.PowerBatteryData.temp}}&#8451;</p>
+                    </div>
+                    <img ng-src="{{battery_src}}" alt="" /> <!-- img/engineflow/battery-e-80.png -->
+                </div>
+            </div>
+
+            <div class="bottle-text" scale-font='{"width":"200px","line-height":"112px"}' ng-show="ctrl.data">
+                <translate>Total Mileage</translate> &nbsp;&nbsp; {{ctrl.data.MileageData.total | number}} KM
+            </div>
+        </div>
+        <!-- 
+        <div class="footer">
+            <img src="img/engineflow/menu-bar-bottom.png" alt="" class="full"/>
+            <div class="footer-left"> </div>
+        </div>
+        -->
+    </div>
+</div>
+
+
+<!-- 
+    </ion-content>
+</ion-view>
+ -->

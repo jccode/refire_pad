@@ -1,0 +1,540 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Refire\n"
+"PO-Revision-Date: 2016-01-10 13:56+0800\n"
+"Last-Translator: jessie <jessie.chen@hongdingltd.com>\n"
+"Language-Team: jessie <jessie.chen@hongdingltd.com>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: energy2.html:18
+msgid "Available Mileage"
+msgstr "剩余里程"
+
+#: energy2.html:36
+msgid "BATTERY"
+msgstr "动力电池"
+
+#: tree.html:28
+msgid "compare to a traditional bus"
+msgstr "与传统汽车相比"
+
+#: energy2.html:10
+msgid "Demo data. To view the real data when you take our bus."
+msgstr "模拟数据.乘坐我们的巴士可以查看巴士的真实数据."
+
+#: energy2.html:28
+msgid "FUEL CELL"
+msgstr "燃料电池"
+
+#: application.js:261
+msgid "Goodbye"
+msgstr "再见"
+
+#: tree.html:45
+msgid "Help us to create a better enviroment for the future of our child"
+msgstr "帮助我们为我们小孩的未来创造一个更好的环境"
+
+#: application.js:262
+msgid "Hoping to see you again!"
+msgstr "希望您再次乘坐我们的汽车"
+
+#: application.js:253
+msgid "Thanks for riding with us!"
+msgstr "感谢您乘坐我们的汽车!"
+
+#: tree.html:20
+msgid "The bus saved"
+msgstr "巴士节省了"
+
+#: tree.html:5
+msgid "This Hydrogen Bus Excretes Water"
+msgstr "氢能源汽车排放出水"
+
+#: energy2.html:44
+msgid "Total Mileage"
+msgstr "总里程"
+
+#: tree.html:24
+msgid "Trees"
+msgstr "树量"
+
+#: application.js:252
+msgid "Welcome"
+msgstr "欢迎"
+
+#~ msgid "1 bus ticket"
+#~ msgstr "1张车票"
+
+#~ msgid "1,000 points &amp; gifts"
+#~ msgstr "1000积分,积分商城兑换礼品"
+
+#~ msgid "3 Months"
+#~ msgstr "3个月"
+
+#~ msgid "6 Months"
+#~ msgstr "6个月"
+
+#~ msgid "About You"
+#~ msgstr "关于我"
+
+#~ msgid "AliPay"
+#~ msgstr "支付宝"
+
+#~ msgid "April"
+#~ msgstr "四月"
+
+#~ msgid "August"
+#~ msgstr "八月"
+
+#~ msgid "Available"
+#~ msgstr "续驶里程"
+
+#~ msgid "Battery"
+#~ msgstr "动力电池"
+
+#~ msgid "Birth Date"
+#~ msgstr "生日"
+
+#~ msgid "Break Time"
+#~ msgstr "休息时间"
+
+#~ msgid "BUS ARRIVING"
+#~ msgstr "巴士到站"
+
+#~ msgid "Bus Infomation"
+#~ msgstr "巴士信息"
+
+#~ msgid "Bus Location"
+#~ msgstr "公交位置"
+
+#~ msgid ""
+#~ "By using the Hydrogen Bus as your transportation. You build up reward "
+#~ "point. These can provide you with discount ticket prices or other reward."
+#~ msgstr ""
+#~ "使用新能源汽车出行,您可以获得额外的奖励。包括获得积分,车票打折,更多优惠活"
+#~ "动正在推出。"
+
+#~ msgid "Cancel"
+#~ msgstr "取消"
+
+#~ msgid "Clean enviroment"
+#~ msgstr "节能减排"
+
+#~ msgid "Clean Enviroment"
+#~ msgstr "节能减排"
+
+#~ msgid "Close"
+#~ msgstr "关闭"
+
+#~ msgid "Collect points for discount on your tickets"
+#~ msgstr "获取积分可以兑换票价打折"
+
+#~ msgid "completed"
+#~ msgstr "完成"
+
+#~ msgid "Confirm password"
+#~ msgstr "重复密码"
+
+#~ msgid "confirm password isn't the same"
+#~ msgstr "密码不一致"
+
+#~ msgid "Current"
+#~ msgstr "电流"
+
+#~ msgid "Current Bus"
+#~ msgstr "当前巴士"
+
+#~ msgid "Current Shift"
+#~ msgstr "本班"
+
+#~ msgid "Data Refresh Rate"
+#~ msgstr "自动刷新频率"
+
+#~ msgid "DAY SHIFT"
+#~ msgstr "白班"
+
+#~ msgid "December"
+#~ msgstr "12月"
+
+#~ msgid ""
+#~ "Demo data. <span class=\"link\" ng-click=\"popup_login()\">Login</span> "
+#~ "to view the real data"
+#~ msgstr ""
+#~ "模拟数据.<span class=\"link\" ng-click=\"popup_login()\">登陆</span>查看真"
+#~ "实数据 "
+
+#~ msgid "discount on all your tickets"
+#~ msgstr "票价优惠"
+
+#~ msgid "Edit"
+#~ msgstr "编辑"
+
+#~ msgid "Energy flow"
+#~ msgstr "能流图"
+
+#~ msgid "Energy saving(kwh)"
+#~ msgstr "节能总数(kwh)"
+
+#~ msgid "Engine and Milage"
+#~ msgstr "车况信息"
+
+#~ msgid "February"
+#~ msgstr "二月"
+
+#~ msgid "Finalize Account"
+#~ msgstr "完成注册"
+
+#~ msgid "Finish Payment"
+#~ msgstr "完成支付"
+
+#~ msgid "Forgot your password?"
+#~ msgstr "忘记密码"
+
+#~ msgid "From date"
+#~ msgstr "开始日期"
+
+#~ msgid "from date must less than to date."
+#~ msgstr "开始日期必须小于结束日期"
+
+#~ msgid "Fuel Cell"
+#~ msgstr "燃料电池"
+
+#~ msgid "Home"
+#~ msgstr "主页"
+
+#~ msgid "Hours"
+#~ msgstr "小时"
+
+#~ msgid "iBeacon Detected"
+#~ msgstr "检测到iBeacon"
+
+#~ msgid "iBeacon not detected"
+#~ msgstr "检测不到iBeacon"
+
+#~ msgid "Index"
+#~ msgstr "氢切生活"
+
+#~ msgid "January"
+#~ msgstr "一月"
+
+#~ msgid "July"
+#~ msgstr "七月"
+
+#~ msgid "June"
+#~ msgstr "六月"
+
+#~ msgid "kilometers on a Hydrogen bus"
+#~ msgstr "公里乘坐氢能源汽车"
+
+#~ msgid "Know when each bus is arriving"
+#~ msgstr "随时掌握公交的到达时间"
+
+#~ msgid "Login"
+#~ msgstr "登陆"
+
+#~ msgid "Login failed. Incorrect username or password."
+#~ msgstr "登陆失败. 用户名或密码不正确."
+
+#~ msgid "login success"
+#~ msgstr "登陆成功"
+
+#~ msgid "Logoff"
+#~ msgstr "退出"
+
+#~ msgid "logoff success."
+#~ msgstr "退出登陆成功"
+
+#~ msgid "logout successful"
+#~ msgstr "退出登陆成功"
+
+#~ msgid "Manual"
+#~ msgstr "手动"
+
+#~ msgid "March"
+#~ msgstr "三月"
+
+#~ msgid "May"
+#~ msgstr "五月"
+
+#~ msgid "Menu"
+#~ msgstr "目录"
+
+#~ msgid "Messages"
+#~ msgstr "消息中心"
+
+#~ msgid "mins"
+#~ msgstr "分钟"
+
+#~ msgid "Mobile No."
+#~ msgstr "手机号"
+
+#~ msgid "mobile number invalid"
+#~ msgstr "手机号码无效"
+
+#~ msgid "Next Bus"
+#~ msgstr "第一辆"
+
+#~ msgid "Nickname"
+#~ msgstr "昵称"
+
+#~ msgid "No Account Yet?"
+#~ msgstr "还没有帐号?"
+
+#~ msgid "No records."
+#~ msgstr "无任何记录"
+
+#~ msgid "November"
+#~ msgstr "11月"
+
+#~ msgid "October"
+#~ msgstr "10月"
+
+#~ msgid "Others"
+#~ msgstr "其他"
+
+#~ msgid "Password"
+#~ msgstr "密码"
+
+#~ msgid "Pay"
+#~ msgstr "支付"
+
+#~ msgid "Pay Ticket"
+#~ msgstr "购票"
+
+#~ msgid "Pay tickets with WeChat or AliPay"
+#~ msgstr "使用微信支付或支付宝购票乘车"
+
+#~ msgid "Payment"
+#~ msgstr "支付"
+
+#~ msgid "Period"
+#~ msgstr "期限"
+
+#~ msgid "Permission denied"
+#~ msgstr "权限受限"
+
+#~ msgid "Please register for your FREE account."
+#~ msgstr "免费注册一个帐号"
+
+#~ msgid "Pull to refresh..."
+#~ msgstr "下拉刷新"
+
+#~ msgid "QQ Acount"
+#~ msgstr "QQ"
+
+#~ msgid "Read more"
+#~ msgstr "更多"
+
+#~ msgid "Real Time Energy Diagram"
+#~ msgstr "实时能流图"
+
+#~ msgid "Reason to sign-up:"
+#~ msgstr "为什么要注册:"
+
+#~ msgid "Register"
+#~ msgstr "注册"
+
+#~ msgid "Register New Account"
+#~ msgstr "注册新帐号"
+
+#~ msgid "Rewards"
+#~ msgstr "奖励"
+
+#~ msgid "Rides on a Hydrogen bus"
+#~ msgstr "次乘坐氢能源汽车"
+
+#~ msgid "second"
+#~ msgstr "秒"
+
+#~ msgid "Select Bus"
+#~ msgstr "选择线路"
+
+#~ msgid "Select your payment method"
+#~ msgstr "选择支付方式"
+
+#~ msgid "September"
+#~ msgstr "九月"
+
+#~ msgid "Settings"
+#~ msgstr "设置"
+
+#~ msgid "Skip"
+#~ msgstr "跳过"
+
+#~ msgid "SMS code"
+#~ msgstr "验证码"
+
+#~ msgid "Social Media"
+#~ msgstr "社交媒体"
+
+#~ msgid "Speed"
+#~ msgstr "速度"
+
+#~ msgid "Take our bus to see how many trees saved by bus"
+#~ msgstr "乘坐我们的汽车可以查看汽车节省的树量"
+
+#~ msgid "Temp."
+#~ msgstr "温度"
+
+#~ msgid "Thank you for riding with us!"
+#~ msgstr "感谢您乘坐我们的汽车!"
+
+#~ msgid "The second one"
+#~ msgstr "第二辆"
+
+#~ msgid "The third one"
+#~ msgstr "第三辆"
+
+#~ msgid "This field is required!"
+#~ msgstr "此字段必填"
+
+#~ msgid "This field is too long"
+#~ msgstr "此字段太长"
+
+#~ msgid "This field is too short!"
+#~ msgstr "此字段长度不够"
+
+#~ msgid "This month"
+#~ msgstr "本月"
+
+#~ msgid "To date"
+#~ msgstr "结束日期"
+
+#~ msgid "Torque"
+#~ msgstr "扭矩"
+
+#~ msgid "Total"
+#~ msgstr "总的"
+
+#~ msgid "Total Distance Driven"
+#~ msgstr "行驶里程总数"
+
+#~ msgid "Total Driving Distance"
+#~ msgstr "行驶里程总数"
+
+#~ msgid "Total Driving Hours"
+#~ msgstr "总驾驶时间"
+
+#~ msgid "Total emission reduction"
+#~ msgstr "减排总数"
+
+#~ msgid "Total Emission Reduction"
+#~ msgstr "减排总数"
+
+#~ msgid "Total energy saving"
+#~ msgstr "节能总数"
+
+#~ msgid "Total Energy Saving"
+#~ msgstr "节能总数"
+
+#~ msgid "Total money saving"
+#~ msgstr "节省钱总数"
+
+#~ msgid "Total Price"
+#~ msgstr "总价"
+
+#~ msgid "Trees saved"
+#~ msgstr "节省树量"
+
+#~ msgid "Update"
+#~ msgstr "更新"
+
+#~ msgid "Update Profile"
+#~ msgstr "更新个人资料"
+
+#~ msgid "update profile failed. #{err}"
+#~ msgstr "更新用户信息失败"
+
+#~ msgid "update profile successful."
+#~ msgstr "更新用户信息成功"
+
+#~ msgid "User is exist"
+#~ msgstr "用户名已存在"
+
+#~ msgid "Username"
+#~ msgstr "用户名"
+
+#~ msgid "util sms code invalid"
+#~ msgstr "后短信验证码失效"
+
+#~ msgid "Vehicle location (GPS)"
+#~ msgstr "车辆位置 (GPS)"
+
+#~ msgid "Verify Phone Number"
+#~ msgstr "验证手机号"
+
+#~ msgid "Verifying your Account"
+#~ msgstr "验证帐号"
+
+#~ msgid "Voltage"
+#~ msgstr "电压"
+
+#~ msgid ""
+#~ "We have sent you an SMS with a verification code. Please use the receive "
+#~ "the received SMS code below."
+#~ msgstr "我们给你发送了一条短信验证码。请在下面使用它进行验证。"
+
+#~ msgid "WeChat Acount"
+#~ msgstr "微信"
+
+#~ msgid "Wechat Wallet"
+#~ msgstr "微信钱包"
+
+#~ msgid "Weibo Acount"
+#~ msgstr "微博"
+
+#~ msgid "You don't have permission to view this page."
+#~ msgstr "你没有权限查看这个页面"
+
+#~ msgid "Your Profile"
+#~ msgstr "我的"
+
+#~ msgid "Your purchase"
+#~ msgstr "你购买的"
+
+#~ msgid "Your Tickets"
+#~ msgstr "购票记录"
+
+#~ msgid "Zero Emission"
+#~ msgstr "零污染"
+
+#~ msgid "Hydrogen"
+#~ msgstr "氢气"
+
+#~ msgid "Last 2"
+#~ msgstr "下下班"
+
+#~ msgid "Last 3"
+#~ msgstr "第3班"
+
+#, fuzzy
+#~ msgid "8% <translate>discount on all your tickets</translate>"
+#~ msgstr "获取积分可以兑换票价打折"
+
+#~ msgid "login failed"
+#~ msgstr "登陆失败"
+
+#~ msgid "Energy Statistics"
+#~ msgstr "节能减排"
+
+#~ msgid "Health Status"
+#~ msgstr "健康状态"
+
+#~ msgid "Log off"
+#~ msgstr "退出"
+
+#~ msgid "Maximum length of this field is {{max}} characters!"
+#~ msgstr "这个字段最长为{{max}}字符"
+
+#~ msgid "Minimum length of this field is {{min}} characters!"
+#~ msgstr "这个字段最少要{{min}}字符"
+
+#~ msgid "Log in"
+#~ msgstr "登陆"

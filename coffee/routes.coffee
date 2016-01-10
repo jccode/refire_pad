@@ -13,6 +13,7 @@ class Config
 				views:
 					'menuContent':
 						templateUrl: 'templates/search.html'
+						controller: 'SearchCtrl as ctrl'
 
 			.state 'app.browse', 
 				url: '/browse'
@@ -47,8 +48,16 @@ class Config
 					'menuContent':
 						templateUrl: 'templates/tree.html'
 
+			.state 'app.energy2',
+				url: '/energy2'
+				views:
+					'menuContent':
+						templateUrl: 'templates/energy2.html'
+
+
 
 		$urlRouterProvider.otherwise '/app/home'
+		#$urlRouterProvider.otherwise '/app/energy2'
 
 
 angular.module('app').config ['$stateProvider', '$urlRouterProvider', Config]

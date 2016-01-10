@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">            
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
@@ -15,17 +16,23 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-
+    <script src="lib/underscore/underscore-min.js"></script>
+    
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
+    <script src="lib/angular-gettext/dist/angular-gettext.min.js"></script>
+    <script src="lib/angular-resource/angular-resource.min.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.min.js"></script>
     <script src="lib/swiper/dist/js/swiper.min.js"></script>
     <script src="lib/angular-swiper/dist/angular-swiper.js"></script>
+    <script src="lib/ngstorage/ngStorage.min.js"></script>
+    <script src="lib/angular-base64/angular-base64.min.js"></script>
     
     <!-- your app's js -->
     <script src="js/application.js"></script>
-    <!-- <script src="js/app.js"></script> -->
-    <!-- <script src="js/controllers.js"></script> -->
+    <script src="js/translations.js"></script>
   </head>
 
   <body ng-app="app">
