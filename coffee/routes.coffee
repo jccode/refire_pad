@@ -52,7 +52,7 @@ class Config
 				url: '/energy2'
 				views:
 					'menuContent':
-						templateUrl: 'templates/energy2.html'
+						templateUrl: 'templates/energy3.html'
 
 
 

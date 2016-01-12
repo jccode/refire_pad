@@ -1,14 +1,19 @@
 
 class TreeCtrl
-	constructor: (@$scope, @$rootScope, @$timeout, @BusData, @auth)->
+	constructor: (@$scope, @$rootScope, @$timeout, @BusData, @auth, @event)->
 		@bus = @$rootScope.bus
 		@BASE = 100				# base number
 		@init()
 		if @bus and @bus.bid and @auth.isLoggedIn()
 			@getdata()
+			
 		@$rootScope.$on "activeChanged", (event,active)=>
 			if active is 4
 				@init()
+
+		@$rootScope.$on @event.ENTER_BUS, (event, bus)=>
+			@bus = bus
+			@getdata()
 
 	init: ->
 		t = document.getElementById("tree")
@@ -24,7 +29,7 @@ class TreeCtrl
 				@calc emission_reduction
 
 	calc:(emission_reduction)->
-		#console.log "reduction: #{emission_reduction}, base: #{@BASE}"
+		# console.log "reduction: #{emission_reduction}, base: #{@BASE}"
 		@$scope.tree = Math.floor(emission_reduction / @BASE)
 		@$scope.percentage = emission_reduction % @BASE
 		@set_percentage (@$scope.percentage / @BASE)
@@ -40,5 +45,6 @@ angular.module('app').controller 'TreeCtrl', [
 	'$timeout',
 	'BusData',
 	'Auth',
+	'event',
 	TreeCtrl
 ]

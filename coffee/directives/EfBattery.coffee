@@ -1,7 +1,7 @@
 
 class EfBattery
 	constructor: ($window, $document)->
-		w0 = 1044				# width_0
+		w0 = 1800				# width_0  1044
 		bw0 = 290				# battery_width_0
 		f0 = 200				# font_size_0: 200%
 		flh0 = 30				# font_line_height_0: 30px

@@ -137,7 +137,8 @@
     };
 
     BeaconEventHandler.prototype.rangeRegion = function(result) {
-      var bus, buses;
+      var bus, buses, region;
+      region = result.region;
       buses = this.beaconManager.find_bus(region.identifier, region.uuid, region.major, region.minor);
       if (buses && buses.length > 0) {
         bus = buses[0];
@@ -354,7 +355,7 @@
         url: '/energy2',
         views: {
           'menuContent': {
-            templateUrl: 'templates/energy2.html'
+            templateUrl: 'templates/energy3.html'
           }
         }
       });
@@ -441,12 +442,12 @@
   var EnergyFlowCtrl;
 
   EnergyFlowCtrl = (function() {
-    function EnergyFlowCtrl($scope, $rootScope, BusData, auth, event) {
+    function EnergyFlowCtrl($scope, $rootScope, BusData, auth, event1) {
       this.$scope = $scope;
       this.$rootScope = $rootScope;
       this.BusData = BusData;
       this.auth = auth;
-      this.event = event;
+      this.event = event1;
       this.bus = this.$rootScope.bus;
       this.img_base_url = "img/engineflow/";
       if (this.bus && this.bus.bid && this.auth.isLoggedIn()) {
@@ -461,6 +462,20 @@
           };
         })(this);
       }
+      this.$rootScope.$on(this.event.ENTER_BUS, (function(_this) {
+        return function(event, bus) {
+          console.log('energy flow, enter bus');
+          _this.bus = bus;
+          return _this.getdata();
+        };
+      })(this));
+      this.$rootScope.$on(this.event.LEAVE_BUS, (function(_this) {
+        return function(event, bus) {
+          console.log('energy flow, leave bus');
+          _this.bus = null;
+          return _this.fallback_init();
+        };
+      })(this));
     }
 
     EnergyFlowCtrl.prototype.getdata = function() {
@@ -601,18 +616,176 @@
 }).call(this);
 
 (function() {
+  var EnergyFlowCtrl;
+
+  EnergyFlowCtrl = (function() {
+    function EnergyFlowCtrl($scope, $rootScope, BusData, auth, event1) {
+      this.$scope = $scope;
+      this.$rootScope = $rootScope;
+      this.BusData = BusData;
+      this.auth = auth;
+      this.event = event1;
+      this.bus = this.$rootScope.bus;
+      this.img_base_url = "img/engineflow/";
+      if (this.bus && this.bus.bid && this.auth.isLoggedIn()) {
+        this.demodata = false;
+        this.getdata();
+      } else {
+        this.demodata = true;
+        this.fallback_init();
+        this.$scope.popup_login = (function(_this) {
+          return function() {
+            return _this.$rootScope.$broadcast(_this.event.REQUIRE_LOGIN, '');
+          };
+        })(this);
+      }
+      this.$rootScope.$on(this.event.ENTER_BUS, (function(_this) {
+        return function(event, bus) {
+          console.log('energy flow, enter bus');
+          _this.bus = bus;
+          return _this.getdata();
+        };
+      })(this));
+      this.$rootScope.$on(this.event.LEAVE_BUS, (function(_this) {
+        return function(event, bus) {
+          console.log('energy flow, leave bus');
+          _this.bus = null;
+          return _this.fallback_init();
+        };
+      })(this));
+    }
+
+    EnergyFlowCtrl.prototype.getdata = function() {
+      return this.BusData.busdata(this.bus.bid).then((function(_this) {
+        return function(ret) {
+          _this.data = ret.data;
+          return _this.init_data();
+        };
+      })(this), (function(_this) {
+        return function() {
+          return _this.fallback_init();
+        };
+      })(this));
+    };
+
+    EnergyFlowCtrl.prototype.init_data = function() {
+      this.$scope.gif_src = this.get_energy_flow_gif(this.data.BusData.status);
+      this.$scope.fuel_cell_src = this.get_fuel_cell_img(this.data.GasData.remain);
+      return this.$scope.battery_src = this.get_battery_img(this.data.PowerBatteryData.remain);
+    };
+
+    EnergyFlowCtrl.prototype.fallback_init = function() {
+      this.$scope.gif_src = this.get_energy_flow_gif(null);
+      this.$scope.fuel_cell_src = this.get_fuel_cell_img(null);
+      return this.$scope.battery_src = this.get_battery_img(null);
+    };
+
+    EnergyFlowCtrl.prototype.get_energy_flow_gif = function(status) {
+      var img;
+      img = (function() {
+        switch (status) {
+          case 0:
+            return "bottom-still.png";
+          case 1:
+            return "E-only-with-bottom.gif";
+          case 2:
+            return "H-and-E-with-bottom.gif";
+          case 3:
+            return "H-to-E-and-engine-with-bottom.gif";
+          case 4:
+            return "Engine-to-E-with-bottom.gif";
+          default:
+            return "E-only-with-bottom.gif";
+        }
+      })();
+      return this.img_base_url + "wide/" + img;
+    };
+
+    EnergyFlowCtrl.prototype.get_fuel_cell_img = function(remain) {
+      var img;
+      img = (function() {
+        switch (false) {
+          case !(remain >= 100):
+            return "battery-h-100.png";
+          case !(remain >= 90):
+            return "battery-h-90.png";
+          case !(remain >= 80):
+            return "battery-h-80.png";
+          case !(remain >= 70):
+            return "battery-h-70.png";
+          case !(remain >= 60):
+            return "battery-h-60.png";
+          case !(remain >= 50):
+            return "battery-h-50.png";
+          case !(remain >= 40):
+            return "battery-h-40.png";
+          case !(remain >= 30):
+            return "battery-h-30.png";
+          case !(remain >= 20):
+            return "battery-h-20.png";
+          case !(remain >= 10):
+            return "battery-h-10.png";
+          default:
+            return "battery-h-0.png";
+        }
+      })();
+      return this.img_base_url + img;
+    };
+
+    EnergyFlowCtrl.prototype.get_battery_img = function(remain) {
+      var img;
+      img = (function() {
+        switch (false) {
+          case !(remain >= 100):
+            return "battery-e-100.png";
+          case !(remain >= 90):
+            return "battery-e-90.png";
+          case !(remain >= 80):
+            return "battery-e-80.png";
+          case !(remain >= 70):
+            return "battery-e-70.png";
+          case !(remain >= 60):
+            return "battery-e-60.png";
+          case !(remain >= 50):
+            return "battery-e-50.png";
+          case !(remain >= 40):
+            return "battery-e-40.png";
+          case !(remain >= 30):
+            return "battery-e-30.png";
+          case !(remain >= 20):
+            return "battery-e-20.png";
+          case !(remain >= 10):
+            return "battery-e-10.png";
+          default:
+            return "battery-e-0.png";
+        }
+      })();
+      return this.img_base_url + img;
+    };
+
+    return EnergyFlowCtrl;
+
+  })();
+
+  angular.module('app').controller('EnergyFlowCtrl3', ['$scope', '$rootScope', 'BusData', 'Auth', 'event', EnergyFlowCtrl]);
+
+}).call(this);
+
+(function() {
   var HomeCtrl;
 
   HomeCtrl = (function() {
-    function HomeCtrl($rootScope, $scope, $timeout) {
+    function HomeCtrl($rootScope, $scope, $timeout, $window) {
       this.$rootScope = $rootScope;
       this.$scope = $scope;
       this.$timeout = $timeout;
-      this.DELAY = 20;
+      this.$window = $window;
+      this.DELAY = 10;
       this.active = 0;
       this.video1 = document.getElementById("video1");
       this.video2 = document.getElementById("video2");
       this.video3 = document.getElementById("video3");
+      this.sections = document.getElementsByClassName("section");
       this.video1.addEventListener('ended', this.video_end_listener.bind(this), false);
       this.video2.addEventListener('ended', this.video_end_listener.bind(this), false);
       this.video3.addEventListener('ended', this.video_end_listener.bind(this), false);
@@ -624,7 +797,7 @@
     };
 
     HomeCtrl.prototype.incr_active = function() {
-      this.active = (this.active + 1) % 5;
+      this.active = (this.active + 1) % 6;
       this.$scope.$apply();
       this.active_handler(this.active);
       return this.$rootScope.$broadcast('activeChanged', this.active);
@@ -680,7 +853,7 @@
 
   })();
 
-  angular.module('app').controller('HomeCtrl', ['$rootScope', '$scope', '$timeout', HomeCtrl]);
+  angular.module('app').controller('HomeCtrl', ['$rootScope', '$scope', '$timeout', '$window', HomeCtrl]);
 
 }).call(this);
 
@@ -765,12 +938,13 @@
   var TreeCtrl;
 
   TreeCtrl = (function() {
-    function TreeCtrl($scope, $rootScope, $timeout, BusData, auth) {
+    function TreeCtrl($scope, $rootScope, $timeout, BusData, auth, event1) {
       this.$scope = $scope;
       this.$rootScope = $rootScope;
       this.$timeout = $timeout;
       this.BusData = BusData;
       this.auth = auth;
+      this.event = event1;
       this.bus = this.$rootScope.bus;
       this.BASE = 100;
       this.init();
@@ -782,6 +956,12 @@
           if (active === 4) {
             return _this.init();
           }
+        };
+      })(this));
+      this.$rootScope.$on(this.event.ENTER_BUS, (function(_this) {
+        return function(event, bus) {
+          _this.bus = bus;
+          return _this.getdata();
         };
       })(this));
     }
@@ -821,7 +1001,25 @@
 
   })();
 
-  angular.module('app').controller('TreeCtrl', ['$scope', '$rootScope', '$timeout', 'BusData', 'Auth', TreeCtrl]);
+  angular.module('app').controller('TreeCtrl', ['$scope', '$rootScope', '$timeout', 'BusData', 'Auth', 'event', TreeCtrl]);
+
+}).call(this);
+
+(function() {
+  var TrustedFilter;
+
+  TrustedFilter = (function() {
+    function TrustedFilter($sce) {
+      return function(url) {
+        return $sce.trustAsResourceUrl(url);
+      };
+    }
+
+    return TrustedFilter;
+
+  })();
+
+  angular.module('app').filter('trusted', ['$sce', TrustedFilter]);
 
 }).call(this);
 
@@ -870,7 +1068,7 @@
   EfBattery = (function() {
     function EfBattery($window, $document) {
       var bw0, f0, flh0, flh_min, link, w0;
-      w0 = 1044;
+      w0 = 1800;
       bw0 = 290;
       f0 = 200;
       flh0 = 30;
@@ -945,96 +1143,6 @@
   })();
 
   angular.module('app').directive('scaleFont', ['$window', '$document', ScaleFont]);
-
-}).call(this);
-
-(function() {
-  var TrustedFilter;
-
-  TrustedFilter = (function() {
-    function TrustedFilter($sce) {
-      return function(url) {
-        return $sce.trustAsResourceUrl(url);
-      };
-    }
-
-    return TrustedFilter;
-
-  })();
-
-  angular.module('app').filter('trusted', ['$sce', TrustedFilter]);
-
-}).call(this);
-
-(function() {
-  var Config, CsrfInterceptor,
-    indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-
-  CsrfInterceptor = (function() {
-    function CsrfInterceptor($cookies) {
-      var allowMethods, cookieName, headerName;
-      headerName = 'X-CSRFToken';
-      cookieName = 'csrftoken';
-      allowMethods = ['GET'];
-      return {
-        'request': function(request) {
-          var ref;
-          if (ref = request.method, indexOf.call(allowMethods, ref) < 0) {
-            request.headers[headerName] = $cookies.get(cookieName);
-          }
-          return request;
-        }
-      };
-    }
-
-    return CsrfInterceptor;
-
-  })();
-
-  Config = (function() {
-    function Config($httpProvider) {
-      $httpProvider.interceptors.push(['$cookies', CsrfInterceptor]);
-    }
-
-    return Config;
-
-  })();
-
-  angular.module('app').config(['$httpProvider', Config]);
-
-}).call(this);
-
-(function() {
-  var Config, Interceptor;
-
-  Interceptor = (function() {
-    function Interceptor($log, $rootScope, $q) {
-      return {
-        response: function(response) {
-          $rootScope.$broadcast("success:" + response.status, response);
-          return response;
-        },
-        responseError: function(response) {
-          $rootScope.$broadcast("error:" + response.status, response);
-          return $q.reject(response);
-        }
-      };
-    }
-
-    return Interceptor;
-
-  })();
-
-  Config = (function() {
-    function Config($httpProvider) {
-      $httpProvider.interceptors.push(['$log', '$rootScope', '$q', Interceptor]);
-    }
-
-    return Config;
-
-  })();
-
-  angular.module('app').config(['$httpProvider', Config]);
 
 }).call(this);
 
@@ -1365,5 +1473,77 @@
   })();
 
   angular.module('app').service('BusData', ['$http', 'settings', BusData]);
+
+}).call(this);
+
+(function() {
+  var Config, CsrfInterceptor,
+    indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+  CsrfInterceptor = (function() {
+    function CsrfInterceptor($cookies) {
+      var allowMethods, cookieName, headerName;
+      headerName = 'X-CSRFToken';
+      cookieName = 'csrftoken';
+      allowMethods = ['GET'];
+      return {
+        'request': function(request) {
+          var ref;
+          if (ref = request.method, indexOf.call(allowMethods, ref) < 0) {
+            request.headers[headerName] = $cookies.get(cookieName);
+          }
+          return request;
+        }
+      };
+    }
+
+    return CsrfInterceptor;
+
+  })();
+
+  Config = (function() {
+    function Config($httpProvider) {
+      $httpProvider.interceptors.push(['$cookies', CsrfInterceptor]);
+    }
+
+    return Config;
+
+  })();
+
+  angular.module('app').config(['$httpProvider', Config]);
+
+}).call(this);
+
+(function() {
+  var Config, Interceptor;
+
+  Interceptor = (function() {
+    function Interceptor($log, $rootScope, $q) {
+      return {
+        response: function(response) {
+          $rootScope.$broadcast("success:" + response.status, response);
+          return response;
+        },
+        responseError: function(response) {
+          $rootScope.$broadcast("error:" + response.status, response);
+          return $q.reject(response);
+        }
+      };
+    }
+
+    return Interceptor;
+
+  })();
+
+  Config = (function() {
+    function Config($httpProvider) {
+      $httpProvider.interceptors.push(['$log', '$rootScope', '$q', Interceptor]);
+    }
+
+    return Config;
+
+  })();
+
+  angular.module('app').config(['$httpProvider', Config]);
 
 }).call(this);

@@ -12,6 +12,16 @@ class EnergyFlowCtrl
 			@$scope.popup_login = ()=>
 				@$rootScope.$broadcast @event.REQUIRE_LOGIN, ''
 
+		@$rootScope.$on @event.ENTER_BUS, (event, bus)=>
+			console.log 'energy flow, enter bus'
+			@bus = bus
+			@getdata()
+			
+		@$rootScope.$on @event.LEAVE_BUS, (event, bus)=>
+			console.log 'energy flow, leave bus'
+			@bus = null
+			@fallback_init()
+
 
 	getdata: ->
 		@BusData.busdata @bus.bid

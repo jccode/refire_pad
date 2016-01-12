@@ -49,7 +49,7 @@ class BeaconEventHandler
 
 	rangeRegion: (result)->
 		#console.log "---------- Ranging ----------"
-		# region = result.region
+		region = result.region
 		# close_beacons = _.filter result.beacons, (b)-> b.proximity in ['ProximityImmediate', 'ProximityNear']
 		# if close_beacons and close_beacons.length > 0
 		# 	buses = _.map close_beacons, (b)=>
