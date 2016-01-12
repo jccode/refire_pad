@@ -22,6 +22,11 @@ class EnergyFlowCtrl
 			@bus = null
 			@fallback_init()
 
+		@$rootScope.$on "activeChanged", (event,active)=>
+			if active is 2
+				console.log 'getdata'
+				@getdata()
+
 
 	getdata: ->
 		@BusData.busdata @bus.bid

@@ -161,8 +161,8 @@ start = ($rootScope, $ionicPlatform, $cordovaBeacon, $cordovaToast, $cordovaLoca
 			console.log e
 
 		# test
-		#BeaconState.load_state()
-		#console.log $rootScope.bus
+		BeaconState.load_state()
+		console.log $rootScope.bus
 		
 
 angular.module('app').run [

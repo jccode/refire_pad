@@ -283,11 +283,13 @@
     return $ionicPlatform.ready(function() {
       var e, error;
       try {
-        return new BeaconBootstrap($rootScope, $cordovaBeacon, $cordovaToast, $cordovaLocalNotification, gettextCatalog, event, Beacons, BeaconManager, BeaconState);
+        new BeaconBootstrap($rootScope, $cordovaBeacon, $cordovaToast, $cordovaLocalNotification, gettextCatalog, event, Beacons, BeaconManager, BeaconState);
       } catch (error) {
         e = error;
-        return console.log(e);
+        console.log(e);
       }
+      BeaconState.load_state();
+      return console.log($rootScope.bus);
     });
   };
 
@@ -653,6 +655,14 @@
           return _this.fallback_init();
         };
       })(this));
+      this.$rootScope.$on("activeChanged", (function(_this) {
+        return function(event, active) {
+          if (active === 2) {
+            console.log('getdata');
+            return _this.getdata();
+          }
+        };
+      })(this));
     }
 
     EnergyFlowCtrl.prototype.getdata = function() {
@@ -1006,24 +1016,6 @@
 }).call(this);
 
 (function() {
-  var TrustedFilter;
-
-  TrustedFilter = (function() {
-    function TrustedFilter($sce) {
-      return function(url) {
-        return $sce.trustAsResourceUrl(url);
-      };
-    }
-
-    return TrustedFilter;
-
-  })();
-
-  angular.module('app').filter('trusted', ['$sce', TrustedFilter]);
-
-}).call(this);
-
-(function() {
   var Cover;
 
   Cover = (function() {
@@ -1143,6 +1135,96 @@
   })();
 
   angular.module('app').directive('scaleFont', ['$window', '$document', ScaleFont]);
+
+}).call(this);
+
+(function() {
+  var TrustedFilter;
+
+  TrustedFilter = (function() {
+    function TrustedFilter($sce) {
+      return function(url) {
+        return $sce.trustAsResourceUrl(url);
+      };
+    }
+
+    return TrustedFilter;
+
+  })();
+
+  angular.module('app').filter('trusted', ['$sce', TrustedFilter]);
+
+}).call(this);
+
+(function() {
+  var Config, CsrfInterceptor,
+    indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+  CsrfInterceptor = (function() {
+    function CsrfInterceptor($cookies) {
+      var allowMethods, cookieName, headerName;
+      headerName = 'X-CSRFToken';
+      cookieName = 'csrftoken';
+      allowMethods = ['GET'];
+      return {
+        'request': function(request) {
+          var ref;
+          if (ref = request.method, indexOf.call(allowMethods, ref) < 0) {
+            request.headers[headerName] = $cookies.get(cookieName);
+          }
+          return request;
+        }
+      };
+    }
+
+    return CsrfInterceptor;
+
+  })();
+
+  Config = (function() {
+    function Config($httpProvider) {
+      $httpProvider.interceptors.push(['$cookies', CsrfInterceptor]);
+    }
+
+    return Config;
+
+  })();
+
+  angular.module('app').config(['$httpProvider', Config]);
+
+}).call(this);
+
+(function() {
+  var Config, Interceptor;
+
+  Interceptor = (function() {
+    function Interceptor($log, $rootScope, $q) {
+      return {
+        response: function(response) {
+          $rootScope.$broadcast("success:" + response.status, response);
+          return response;
+        },
+        responseError: function(response) {
+          $rootScope.$broadcast("error:" + response.status, response);
+          return $q.reject(response);
+        }
+      };
+    }
+
+    return Interceptor;
+
+  })();
+
+  Config = (function() {
+    function Config($httpProvider) {
+      $httpProvider.interceptors.push(['$log', '$rootScope', '$q', Interceptor]);
+    }
+
+    return Config;
+
+  })();
+
+  angular.module('app').config(['$httpProvider', Config]);
 
 }).call(this);
 
@@ -1353,6 +1435,12 @@
     };
 
     BeaconState.prototype.load_state = function() {
+      this.$localStorage.$default({
+        bus: {
+          bid: "1",
+          plate_number: "粤E9527"
+        }
+      });
       this.$rootScope.bus = this.$localStorage.bus;
       return this.$rootScope.beacon_last_ts = this.$localStorage.beacon_last_ts;
     };
@@ -1473,77 +1561,5 @@
   })();
 
   angular.module('app').service('BusData', ['$http', 'settings', BusData]);
-
-}).call(this);
-
-(function() {
-  var Config, CsrfInterceptor,
-    indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-
-  CsrfInterceptor = (function() {
-    function CsrfInterceptor($cookies) {
-      var allowMethods, cookieName, headerName;
-      headerName = 'X-CSRFToken';
-      cookieName = 'csrftoken';
-      allowMethods = ['GET'];
-      return {
-        'request': function(request) {
-          var ref;
-          if (ref = request.method, indexOf.call(allowMethods, ref) < 0) {
-            request.headers[headerName] = $cookies.get(cookieName);
-          }
-          return request;
-        }
-      };
-    }
-
-    return CsrfInterceptor;
-
-  })();
-
-  Config = (function() {
-    function Config($httpProvider) {
-      $httpProvider.interceptors.push(['$cookies', CsrfInterceptor]);
-    }
-
-    return Config;
-
-  })();
-
-  angular.module('app').config(['$httpProvider', Config]);
-
-}).call(this);
-
-(function() {
-  var Config, Interceptor;
-
-  Interceptor = (function() {
-    function Interceptor($log, $rootScope, $q) {
-      return {
-        response: function(response) {
-          $rootScope.$broadcast("success:" + response.status, response);
-          return response;
-        },
-        responseError: function(response) {
-          $rootScope.$broadcast("error:" + response.status, response);
-          return $q.reject(response);
-        }
-      };
-    }
-
-    return Interceptor;
-
-  })();
-
-  Config = (function() {
-    function Config($httpProvider) {
-      $httpProvider.interceptors.push(['$log', '$rootScope', '$q', Interceptor]);
-    }
-
-    return Config;
-
-  })();
-
-  angular.module('app').config(['$httpProvider', Config]);
 
 }).call(this);
