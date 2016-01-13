@@ -2,6 +2,8 @@
 class EnergyFlowCtrl
 	constructor: (@$scope, @$rootScope, @$interval, @BusData, @auth, @event)->
 		@bus = @$rootScope.bus
+		console.log "Energy flow"
+		console.log JSON.stringify @bus
 		@img_base_url = "img/engineflow/"
 		if @bus and @bus.bid and @auth.isLoggedIn()
 			@demodata = false
@@ -22,7 +24,9 @@ class EnergyFlowCtrl
 			@bus = null
 			@fallback_init()
 
-		@$rootScope.$on "activeChanged", (event,active)=>
+		@$scope.$on "activeChanged", (event,active)=>
+			console.log 'active changed'
+			console.log @
 			if active is 2
 				console.log 'getdata'
 				@getdata()

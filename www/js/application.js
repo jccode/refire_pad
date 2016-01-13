@@ -401,129 +401,6 @@
 }).call(this);
 
 (function() {
-  var Cover;
-
-  Cover = (function() {
-    function Cover($window, $document) {
-      var link, sh0, sw0;
-      sw0 = $window.screen.width;
-      sh0 = $window.screen.height;
-      link = function(scope, el, attrs) {
-        var f0, s0, set_size, w0;
-        s0 = JSON.parse(attrs.cover);
-        w0 = parseInt(s0['width']);
-        f0 = parseInt(s0['font-size']);
-        set_size = function() {
-          var factor, l;
-          l = Math.min(sw0, sh0);
-          factor = l / w0;
-          return el.css({
-            "font-size": f0 * factor + "px",
-            "width": l + "px",
-            "height": l + "px"
-          });
-        };
-        return set_size();
-      };
-      return {
-        restrict: 'AC',
-        link: link
-      };
-    }
-
-    return Cover;
-
-  })();
-
-  angular.module('app').directive('cover', ['$window', '$document', Cover]);
-
-}).call(this);
-
-(function() {
-  var EfBattery;
-
-  EfBattery = (function() {
-    function EfBattery($window, $document) {
-      var bw0, f0, flh0, flh_min, link, w0;
-      w0 = 1800;
-      bw0 = 290;
-      f0 = 200;
-      flh0 = 30;
-      flh_min = 12;
-      link = function(scope, el, attrs) {
-        var main, set_width;
-        main = el.parent()[0];
-        set_width = function() {
-          var factor;
-          factor = main.clientWidth / w0;
-          return el.css({
-            "width": bw0 * factor + "px",
-            "font-size": f0 * factor + "%",
-            "line-height": Math.max(flh0 * factor, flh_min) + "px"
-          });
-        };
-        set_width();
-        return angular.element($window).bind('resize', function() {
-          return set_width();
-        });
-      };
-      return {
-        restrict: 'A',
-        link: link
-      };
-    }
-
-    return EfBattery;
-
-  })();
-
-  angular.module('app').directive('efbattery', ['$window', '$document', EfBattery]);
-
-}).call(this);
-
-(function() {
-  var ScaleFont;
-
-  ScaleFont = (function() {
-    function ScaleFont($window, $document) {
-      var f0, link, w0;
-      w0 = 1044;
-      f0 = 30;
-      link = function(scope, el, attrs) {
-        var lineHeight, pare, scale, style0, width;
-        pare = el.parent()[0];
-        style0 = JSON.parse(attrs.scaleFont);
-        width = parseInt(style0['width']);
-        lineHeight = parseInt(style0['line-height']);
-        scale = function() {
-          var factor;
-          factor = pare.clientWidth / w0;
-          return el.css({
-            "font-size": f0 * factor + "px",
-            "line-height": lineHeight * factor + "px",
-            "margin-left": -(width * factor) / 2 + "px"
-          });
-        };
-        scale();
-        return angular.element($window).bind('resize', function() {
-          return scale();
-        });
-      };
-      return {
-        restrict: 'A',
-        link: link
-      };
-    }
-
-    return ScaleFont;
-
-  })();
-
-  angular.module('app').directive('scaleFont', ['$window', '$document', ScaleFont]);
-
-}).call(this);
-
-(function() {
   var AppCtrl;
 
   AppCtrl = (function() {
@@ -745,6 +622,8 @@
       this.auth = auth;
       this.event = event1;
       this.bus = this.$rootScope.bus;
+      console.log("Energy flow");
+      console.log(JSON.stringify(this.bus));
       this.img_base_url = "img/engineflow/";
       if (this.bus && this.bus.bid && this.auth.isLoggedIn()) {
         this.demodata = false;
@@ -772,8 +651,10 @@
           return _this.fallback_init();
         };
       })(this));
-      this.$rootScope.$on("activeChanged", (function(_this) {
+      this.$scope.$on("activeChanged", (function(_this) {
         return function(event, active) {
+          console.log('active changed');
+          console.log(_this);
           if (active === 2) {
             console.log('getdata');
             _this.getdata();
@@ -941,7 +822,7 @@
       this.active = (this.active + 1) % 6;
       this.$scope.$apply();
       this.active_handler(this.active);
-      return this.$rootScope.$broadcast('activeChanged', this.active);
+      return this.$scope.$broadcast('activeChanged', this.active);
     };
 
     HomeCtrl.prototype.active_handler = function(idx) {
@@ -1143,6 +1024,129 @@
   })();
 
   angular.module('app').controller('TreeCtrl', ['$scope', '$rootScope', '$timeout', 'BusData', 'Auth', 'event', TreeCtrl]);
+
+}).call(this);
+
+(function() {
+  var Cover;
+
+  Cover = (function() {
+    function Cover($window, $document) {
+      var link, sh0, sw0;
+      sw0 = $window.screen.width;
+      sh0 = $window.screen.height;
+      link = function(scope, el, attrs) {
+        var f0, s0, set_size, w0;
+        s0 = JSON.parse(attrs.cover);
+        w0 = parseInt(s0['width']);
+        f0 = parseInt(s0['font-size']);
+        set_size = function() {
+          var factor, l;
+          l = Math.min(sw0, sh0);
+          factor = l / w0;
+          return el.css({
+            "font-size": f0 * factor + "px",
+            "width": l + "px",
+            "height": l + "px"
+          });
+        };
+        return set_size();
+      };
+      return {
+        restrict: 'AC',
+        link: link
+      };
+    }
+
+    return Cover;
+
+  })();
+
+  angular.module('app').directive('cover', ['$window', '$document', Cover]);
+
+}).call(this);
+
+(function() {
+  var EfBattery;
+
+  EfBattery = (function() {
+    function EfBattery($window, $document) {
+      var bw0, f0, flh0, flh_min, link, w0;
+      w0 = 1800;
+      bw0 = 290;
+      f0 = 200;
+      flh0 = 30;
+      flh_min = 12;
+      link = function(scope, el, attrs) {
+        var main, set_width;
+        main = el.parent()[0];
+        set_width = function() {
+          var factor;
+          factor = main.clientWidth / w0;
+          return el.css({
+            "width": bw0 * factor + "px",
+            "font-size": f0 * factor + "%",
+            "line-height": Math.max(flh0 * factor, flh_min) + "px"
+          });
+        };
+        set_width();
+        return angular.element($window).bind('resize', function() {
+          return set_width();
+        });
+      };
+      return {
+        restrict: 'A',
+        link: link
+      };
+    }
+
+    return EfBattery;
+
+  })();
+
+  angular.module('app').directive('efbattery', ['$window', '$document', EfBattery]);
+
+}).call(this);
+
+(function() {
+  var ScaleFont;
+
+  ScaleFont = (function() {
+    function ScaleFont($window, $document) {
+      var f0, link, w0;
+      w0 = 1044;
+      f0 = 30;
+      link = function(scope, el, attrs) {
+        var lineHeight, pare, scale, style0, width;
+        pare = el.parent()[0];
+        style0 = JSON.parse(attrs.scaleFont);
+        width = parseInt(style0['width']);
+        lineHeight = parseInt(style0['line-height']);
+        scale = function() {
+          var factor;
+          factor = pare.clientWidth / w0;
+          return el.css({
+            "font-size": f0 * factor + "px",
+            "line-height": lineHeight * factor + "px",
+            "margin-left": -(width * factor) / 2 + "px"
+          });
+        };
+        scale();
+        return angular.element($window).bind('resize', function() {
+          return scale();
+        });
+      };
+      return {
+        restrict: 'A',
+        link: link
+      };
+    }
+
+    return ScaleFont;
+
+  })();
+
+  angular.module('app').directive('scaleFont', ['$window', '$document', ScaleFont]);
 
 }).call(this);
 

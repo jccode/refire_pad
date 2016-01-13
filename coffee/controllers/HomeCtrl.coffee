@@ -23,7 +23,7 @@ class HomeCtrl
 		
 		@$scope.$apply()
 		@active_handler @active
-		@$rootScope.$broadcast 'activeChanged', @active
+		@$scope.$broadcast 'activeChanged', @active
 
 	active_handler: (idx)->
 		# console.log "active handler #{idx} "
