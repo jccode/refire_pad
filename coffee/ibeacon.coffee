@@ -155,11 +155,11 @@ start = ($rootScope, $ionicPlatform, $cordovaBeacon, $cordovaToast, $cordovaLoca
 	if not Auth.isLoggedIn()
 		login(Auth)
 	$ionicPlatform.ready ->
-		try
-			new BeaconBootstrap $rootScope, $cordovaBeacon, $cordovaToast, $cordovaLocalNotification, gettextCatalog, event, Beacons, BeaconManager, BeaconState
-		catch e
-			console.log e
-
+		# try
+		# 	new BeaconBootstrap $rootScope, $cordovaBeacon, $cordovaToast, $cordovaLocalNotification, gettextCatalog, event, Beacons, BeaconManager, BeaconState
+		# catch e
+		# 	console.log e
+		
 		# test
 		BeaconState.load_state()
 		console.log $rootScope.bus

@@ -1,6 +1,6 @@
 
 class EnergyFlowCtrl
-	constructor: (@$scope, @$rootScope, @BusData, @auth, @event)->
+	constructor: (@$scope, @$rootScope, @$interval, @BusData, @auth, @event)->
 		@bus = @$rootScope.bus
 		@img_base_url = "img/engineflow/"
 		if @bus and @bus.bid and @auth.isLoggedIn()
@@ -26,7 +26,16 @@ class EnergyFlowCtrl
 			if active is 2
 				console.log 'getdata'
 				@getdata()
+				@auto_refresh()
+			else
+				if @refresh_timer
+					@$interval.cancel @refresh_timer
 
+	auto_refresh: ()->
+		@refresh_timer = @$interval ()=>
+			console.log 'refresh.'
+			@getdata()
+		, 1500
 
 	getdata: ->
 		@BusData.busdata @bus.bid
@@ -90,6 +99,7 @@ class EnergyFlowCtrl
 angular.module('app').controller 'EnergyFlowCtrl3', [
 	'$scope',
 	'$rootScope',
+	'$interval',
 	'BusData',
 	'Auth',
 	'event',

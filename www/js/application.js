@@ -281,13 +281,6 @@
       login(Auth);
     }
     return $ionicPlatform.ready(function() {
-      var e, error;
-      try {
-        new BeaconBootstrap($rootScope, $cordovaBeacon, $cordovaToast, $cordovaLocalNotification, gettextCatalog, event, Beacons, BeaconManager, BeaconState);
-      } catch (error) {
-        e = error;
-        console.log(e);
-      }
       BeaconState.load_state();
       return console.log($rootScope.bus);
     });
@@ -404,6 +397,129 @@
   })();
 
   angular.module('app').config(['$httpProvider', '$resourceProvider', Ajax]);
+
+}).call(this);
+
+(function() {
+  var Cover;
+
+  Cover = (function() {
+    function Cover($window, $document) {
+      var link, sh0, sw0;
+      sw0 = $window.screen.width;
+      sh0 = $window.screen.height;
+      link = function(scope, el, attrs) {
+        var f0, s0, set_size, w0;
+        s0 = JSON.parse(attrs.cover);
+        w0 = parseInt(s0['width']);
+        f0 = parseInt(s0['font-size']);
+        set_size = function() {
+          var factor, l;
+          l = Math.min(sw0, sh0);
+          factor = l / w0;
+          return el.css({
+            "font-size": f0 * factor + "px",
+            "width": l + "px",
+            "height": l + "px"
+          });
+        };
+        return set_size();
+      };
+      return {
+        restrict: 'AC',
+        link: link
+      };
+    }
+
+    return Cover;
+
+  })();
+
+  angular.module('app').directive('cover', ['$window', '$document', Cover]);
+
+}).call(this);
+
+(function() {
+  var EfBattery;
+
+  EfBattery = (function() {
+    function EfBattery($window, $document) {
+      var bw0, f0, flh0, flh_min, link, w0;
+      w0 = 1800;
+      bw0 = 290;
+      f0 = 200;
+      flh0 = 30;
+      flh_min = 12;
+      link = function(scope, el, attrs) {
+        var main, set_width;
+        main = el.parent()[0];
+        set_width = function() {
+          var factor;
+          factor = main.clientWidth / w0;
+          return el.css({
+            "width": bw0 * factor + "px",
+            "font-size": f0 * factor + "%",
+            "line-height": Math.max(flh0 * factor, flh_min) + "px"
+          });
+        };
+        set_width();
+        return angular.element($window).bind('resize', function() {
+          return set_width();
+        });
+      };
+      return {
+        restrict: 'A',
+        link: link
+      };
+    }
+
+    return EfBattery;
+
+  })();
+
+  angular.module('app').directive('efbattery', ['$window', '$document', EfBattery]);
+
+}).call(this);
+
+(function() {
+  var ScaleFont;
+
+  ScaleFont = (function() {
+    function ScaleFont($window, $document) {
+      var f0, link, w0;
+      w0 = 1044;
+      f0 = 30;
+      link = function(scope, el, attrs) {
+        var lineHeight, pare, scale, style0, width;
+        pare = el.parent()[0];
+        style0 = JSON.parse(attrs.scaleFont);
+        width = parseInt(style0['width']);
+        lineHeight = parseInt(style0['line-height']);
+        scale = function() {
+          var factor;
+          factor = pare.clientWidth / w0;
+          return el.css({
+            "font-size": f0 * factor + "px",
+            "line-height": lineHeight * factor + "px",
+            "margin-left": -(width * factor) / 2 + "px"
+          });
+        };
+        scale();
+        return angular.element($window).bind('resize', function() {
+          return scale();
+        });
+      };
+      return {
+        restrict: 'A',
+        link: link
+      };
+    }
+
+    return ScaleFont;
+
+  })();
+
+  angular.module('app').directive('scaleFont', ['$window', '$document', ScaleFont]);
 
 }).call(this);
 
@@ -621,9 +737,10 @@
   var EnergyFlowCtrl;
 
   EnergyFlowCtrl = (function() {
-    function EnergyFlowCtrl($scope, $rootScope, BusData, auth, event1) {
+    function EnergyFlowCtrl($scope, $rootScope, $interval, BusData, auth, event1) {
       this.$scope = $scope;
       this.$rootScope = $rootScope;
+      this.$interval = $interval;
       this.BusData = BusData;
       this.auth = auth;
       this.event = event1;
@@ -659,11 +776,25 @@
         return function(event, active) {
           if (active === 2) {
             console.log('getdata');
-            return _this.getdata();
+            _this.getdata();
+            return _this.auto_refresh();
+          } else {
+            if (_this.refresh_timer) {
+              return _this.$interval.cancel(_this.refresh_timer);
+            }
           }
         };
       })(this));
     }
+
+    EnergyFlowCtrl.prototype.auto_refresh = function() {
+      return this.refresh_timer = this.$interval((function(_this) {
+        return function() {
+          console.log('refresh.');
+          return _this.getdata();
+        };
+      })(this), 1500);
+    };
 
     EnergyFlowCtrl.prototype.getdata = function() {
       return this.BusData.busdata(this.bus.bid).then((function(_this) {
@@ -777,7 +908,7 @@
 
   })();
 
-  angular.module('app').controller('EnergyFlowCtrl3', ['$scope', '$rootScope', 'BusData', 'Auth', 'event', EnergyFlowCtrl]);
+  angular.module('app').controller('EnergyFlowCtrl3', ['$scope', '$rootScope', '$interval', 'BusData', 'Auth', 'event', EnergyFlowCtrl]);
 
 }).call(this);
 
@@ -1012,129 +1143,6 @@
   })();
 
   angular.module('app').controller('TreeCtrl', ['$scope', '$rootScope', '$timeout', 'BusData', 'Auth', 'event', TreeCtrl]);
-
-}).call(this);
-
-(function() {
-  var Cover;
-
-  Cover = (function() {
-    function Cover($window, $document) {
-      var link, sh0, sw0;
-      sw0 = $window.screen.width;
-      sh0 = $window.screen.height;
-      link = function(scope, el, attrs) {
-        var f0, s0, set_size, w0;
-        s0 = JSON.parse(attrs.cover);
-        w0 = parseInt(s0['width']);
-        f0 = parseInt(s0['font-size']);
-        set_size = function() {
-          var factor, l;
-          l = Math.min(sw0, sh0);
-          factor = l / w0;
-          return el.css({
-            "font-size": f0 * factor + "px",
-            "width": l + "px",
-            "height": l + "px"
-          });
-        };
-        return set_size();
-      };
-      return {
-        restrict: 'AC',
-        link: link
-      };
-    }
-
-    return Cover;
-
-  })();
-
-  angular.module('app').directive('cover', ['$window', '$document', Cover]);
-
-}).call(this);
-
-(function() {
-  var EfBattery;
-
-  EfBattery = (function() {
-    function EfBattery($window, $document) {
-      var bw0, f0, flh0, flh_min, link, w0;
-      w0 = 1800;
-      bw0 = 290;
-      f0 = 200;
-      flh0 = 30;
-      flh_min = 12;
-      link = function(scope, el, attrs) {
-        var main, set_width;
-        main = el.parent()[0];
-        set_width = function() {
-          var factor;
-          factor = main.clientWidth / w0;
-          return el.css({
-            "width": bw0 * factor + "px",
-            "font-size": f0 * factor + "%",
-            "line-height": Math.max(flh0 * factor, flh_min) + "px"
-          });
-        };
-        set_width();
-        return angular.element($window).bind('resize', function() {
-          return set_width();
-        });
-      };
-      return {
-        restrict: 'A',
-        link: link
-      };
-    }
-
-    return EfBattery;
-
-  })();
-
-  angular.module('app').directive('efbattery', ['$window', '$document', EfBattery]);
-
-}).call(this);
-
-(function() {
-  var ScaleFont;
-
-  ScaleFont = (function() {
-    function ScaleFont($window, $document) {
-      var f0, link, w0;
-      w0 = 1044;
-      f0 = 30;
-      link = function(scope, el, attrs) {
-        var lineHeight, pare, scale, style0, width;
-        pare = el.parent()[0];
-        style0 = JSON.parse(attrs.scaleFont);
-        width = parseInt(style0['width']);
-        lineHeight = parseInt(style0['line-height']);
-        scale = function() {
-          var factor;
-          factor = pare.clientWidth / w0;
-          return el.css({
-            "font-size": f0 * factor + "px",
-            "line-height": lineHeight * factor + "px",
-            "margin-left": -(width * factor) / 2 + "px"
-          });
-        };
-        scale();
-        return angular.element($window).bind('resize', function() {
-          return scale();
-        });
-      };
-      return {
-        restrict: 'A',
-        link: link
-      };
-    }
-
-    return ScaleFont;
-
-  })();
-
-  angular.module('app').directive('scaleFont', ['$window', '$document', ScaleFont]);
 
 }).call(this);
 
