@@ -654,11 +654,10 @@
       this.$scope.$on("activeChanged", (function(_this) {
         return function(event, active) {
           console.log('active changed');
-          console.log(_this);
           if (active === 2) {
             console.log('getdata');
-            _this.getdata();
-            return _this.auto_refresh();
+            _this.getdata.apply(_this);
+            return _this.auto_refresh.apply(_this);
           } else {
             if (_this.refresh_timer) {
               return _this.$interval.cancel(_this.refresh_timer);

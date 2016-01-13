@@ -26,11 +26,10 @@ class EnergyFlowCtrl
 
 		@$scope.$on "activeChanged", (event,active)=>
 			console.log 'active changed'
-			console.log @
 			if active is 2
 				console.log 'getdata'
-				@getdata()
-				@auto_refresh()
+				@getdata.apply(@)
+				@auto_refresh.apply(@)
 			else
 				if @refresh_timer
 					@$interval.cancel @refresh_timer
