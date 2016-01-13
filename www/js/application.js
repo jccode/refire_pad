@@ -615,6 +615,7 @@
 
   EnergyFlowCtrl = (function() {
     function EnergyFlowCtrl($scope, $rootScope, $interval, BusData, auth, event1) {
+      var self;
       this.$scope = $scope;
       this.$rootScope = $rootScope;
       this.$interval = $interval;
@@ -651,16 +652,17 @@
           return _this.fallback_init();
         };
       })(this));
+      self = this;
       this.$scope.$on("activeChanged", (function(_this) {
         return function(event, active) {
           console.log('active changed');
           if (active === 2) {
             console.log('getdata');
-            _this.getdata.apply(_this);
-            return _this.auto_refresh.apply(_this);
+            self.getdata.apply(self);
+            return self.auto_refresh.apply(self);
           } else {
-            if (_this.refresh_timer) {
-              return _this.$interval.cancel(_this.refresh_timer);
+            if (self.refresh_timer) {
+              return self.$interval.cancel(self.refresh_timer);
             }
           }
         };
