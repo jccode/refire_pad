@@ -3,8 +3,8 @@
     <div class="endashboard3">
         <div class="head">
             <img src="img/engineflow/wide/menu-top.png" alt="" class="full"/>
-            <div class="title" scale-font='{"width":"200px","line-height":"87px"}' ng-show="ctrl.data"> 
-                <translate>Available Mileage</translate> &nbsp;&nbsp; {{ctrl.data.MileageData.remain}} KM
+            <div class="title" scale-font='{"width":"200px","line-height":"87px"}' ng-show="data"> 
+                <translate>Available Mileage</translate> &nbsp;&nbsp; {{data.MileageData.remain}} KM
             </div>
         </div>
         <div class="main" id="main">
@@ -15,7 +15,7 @@
                 <div class="battery-container">
                     <div class="text">
                         <p translate>FUEL CELL</p>
-                        <p ng-show="ctrl.data">{{ctrl.data.GasData.remain}}%  &nbsp;&nbsp;  {{ctrl.data.GasData.bottle_temp}}&#8451;</p>
+                        <p ng-show="data">{{data.GasData.remain}}%  &nbsp;&nbsp;  {{data.GasData.bottle_temp}}&#8451;</p>
                     </div>
                     <img ng-src="{{fuel_cell_src}}" alt="" />
                 </div>
@@ -23,14 +23,14 @@
                 <div class="battery-container">
                     <div class="text">
                         <p translate>BATTERY</p>
-                        <p ng-show="ctrl.data">{{ctrl.data.PowerBatteryData.remain}}%  &nbsp;&nbsp;  {{ctrl.data.PowerBatteryData.temp}}&#8451;</p>
+                        <p ng-show="data">{{data.PowerBatteryData.remain}}%  &nbsp;&nbsp;  {{data.PowerBatteryData.temp}}&#8451;</p>
                     </div>
                     <img ng-src="{{battery_src}}" alt="" /> <!-- img/engineflow/battery-e-80.png -->
                 </div>
             </div>
 
-            <div class="bottle-text" scale-font='{"width":"200px","line-height":"82px"}' ng-show="ctrl.data">
-                <translate>Total Mileage</translate> &nbsp;&nbsp; {{ctrl.data.MileageData.total | number}} KM
+            <div class="bottle-text" scale-font='{"width":"200px","line-height":"82px"}' ng-show="data">
+                <translate>Total Mileage</translate> &nbsp;&nbsp; {{data.MileageData.total | number}} KM
             </div>
         </div>
     </div>

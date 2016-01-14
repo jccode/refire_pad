@@ -26,9 +26,6 @@ class HomeCtrl
 		@$scope.$broadcast 'activeChanged', @active
 
 	active_handler: (idx)->
-		# console.log "active handler #{idx} "
-		# @sections.item(idx).style.width = @width
-		
 		switch idx
 			when 0 then @play_video(@video1)
 			when 1 then @play_video(@video2)
@@ -43,17 +40,10 @@ class HomeCtrl
 
 	play_video: (video)->
 		try
-			# video.style.width = @width
-			# video.width = @width
-			# video.width = "100%"
-			# video.style.width = "100%"
-			
 			@video_full_screen video
 		catch err
 			console.log err
 		video.play()
-		
-		# @$scope.msg = "#{@active}; #{@$window.screen.width}, #{@$window.screen.height} ; video: #{video.style.width}"
 
 	video_full_screen: (elem)->
 		if elem.requestFullscreen

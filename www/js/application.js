@@ -7,7 +7,8 @@
   var Bootstrap;
 
   Bootstrap = (function() {
-    function Bootstrap($ionicPlatform) {
+    function Bootstrap($ionicPlatform, $http, $rootScope, auth, event) {
+      var auth_header;
       $ionicPlatform.ready(function() {
         if (window.cordova && window.cordova.plugins.Keyboard) {
           cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -17,13 +18,32 @@
           return StatusBar.styleDefault();
         }
       });
+      auth_header = function(user) {
+        return $http.defaults.headers.common['Authorization'] = 'Token ' + user.token;
+      };
+      auth_header(auth.user);
+      $rootScope.$on(event.LOGIN, (function(_this) {
+        return function(event, user) {
+          return auth_header(user);
+        };
+      })(this));
+      $rootScope.$on(event.SIGNUP, (function(_this) {
+        return function(event, user) {
+          return auth_header(user);
+        };
+      })(this));
+      $rootScope.$on(event.LOGOUT, (function(_this) {
+        return function(event) {
+          return $http.defaults.headers.common['Authorization'] = void 0;
+        };
+      })(this));
     }
 
     return Bootstrap;
 
   })();
 
-  angular.module('app').run(['$ionicPlatform', Bootstrap]);
+  angular.module('app').run(['$ionicPlatform', '$http', '$rootScope', 'Auth', 'event', Bootstrap]);
 
 }).call(this);
 
@@ -611,16 +631,177 @@
 }).call(this);
 
 (function() {
-  var EnergyFlowCtrl;
+  var EnergyFlowCtrl, EnergyFlowCtrl2;
+
+  EnergyFlowCtrl2 = (function() {
+    function EnergyFlowCtrl2($scope, $rootScope, $interval, BusData, auth, Event) {
+      var auto_refresh, bus, event, fallback_init, get_battery_img, get_energy_flow_gif, get_fuel_cell_img, getdata, img_base_url, init, init_data, refresh_timer;
+      bus = $rootScope.bus;
+      img_base_url = "img/engineflow/";
+      refresh_timer = null;
+      get_energy_flow_gif = function(status) {
+        var img;
+        img = (function() {
+          switch (status) {
+            case 0:
+              return "bottom-still.png";
+            case 1:
+              return "E-only-with-bottom.gif";
+            case 2:
+              return "H-and-E-with-bottom.gif";
+            case 3:
+              return "H-to-E-and-engine-with-bottom.gif";
+            case 4:
+              return "Engine-to-E-with-bottom.gif";
+            default:
+              return "E-only-with-bottom.gif";
+          }
+        })();
+        return img_base_url + "wide/" + img;
+      };
+      get_fuel_cell_img = function(remain) {
+        var img;
+        img = (function() {
+          switch (false) {
+            case !(remain >= 100):
+              return "battery-h-100.png";
+            case !(remain >= 90):
+              return "battery-h-90.png";
+            case !(remain >= 80):
+              return "battery-h-80.png";
+            case !(remain >= 70):
+              return "battery-h-70.png";
+            case !(remain >= 60):
+              return "battery-h-60.png";
+            case !(remain >= 50):
+              return "battery-h-50.png";
+            case !(remain >= 40):
+              return "battery-h-40.png";
+            case !(remain >= 30):
+              return "battery-h-30.png";
+            case !(remain >= 20):
+              return "battery-h-20.png";
+            case !(remain >= 10):
+              return "battery-h-10.png";
+            default:
+              return "battery-h-0.png";
+          }
+        })();
+        return img_base_url + img;
+      };
+      get_battery_img = function(remain) {
+        var img;
+        img = (function() {
+          switch (false) {
+            case !(remain >= 100):
+              return "battery-e-100.png";
+            case !(remain >= 90):
+              return "battery-e-90.png";
+            case !(remain >= 80):
+              return "battery-e-80.png";
+            case !(remain >= 70):
+              return "battery-e-70.png";
+            case !(remain >= 60):
+              return "battery-e-60.png";
+            case !(remain >= 50):
+              return "battery-e-50.png";
+            case !(remain >= 40):
+              return "battery-e-40.png";
+            case !(remain >= 30):
+              return "battery-e-30.png";
+            case !(remain >= 20):
+              return "battery-e-20.png";
+            case !(remain >= 10):
+              return "battery-e-10.png";
+            default:
+              return "battery-e-0.png";
+          }
+        })();
+        return img_base_url + img;
+      };
+      fallback_init = function() {
+        $scope.gif_src = get_energy_flow_gif(null);
+        $scope.fuel_cell_src = get_fuel_cell_img(null);
+        return $scope.battery_src = get_battery_img(null);
+      };
+      init_data = function() {
+        $scope.gif_src = get_energy_flow_gif($scope.data.BusData.status);
+        $scope.fuel_cell_src = get_fuel_cell_img($scope.data.GasData.remain);
+        return $scope.battery_src = get_battery_img($scope.data.PowerBatteryData.remain);
+      };
+      getdata = function() {
+        return BusData.busdata($rootScope.bus.bid).then((function(_this) {
+          return function(ret) {
+            $scope.data = ret.data;
+            return init_data();
+          };
+        })(this), (function(_this) {
+          return function() {
+            return fallback_init();
+          };
+        })(this));
+      };
+      init = function() {
+        if (bus && bus.bid && auth.isLoggedIn()) {
+          this.demodata = false;
+          return getdata();
+        } else {
+          return this.demodata = true;
+        }
+      };
+      auto_refresh = function() {
+        return refresh_timer = $interval(function() {
+          console.log('refresh.');
+          return getdata();
+        }, 1500);
+      };
+      event = function() {
+        $rootScope.$on(Event.ENTER_BUS, (function(_this) {
+          return function(event, bus_) {
+            console.log('energy flow, enter bus');
+            bus = bus_;
+            return getdata();
+          };
+        })(this));
+        $rootScope.$on(Event.LEAVE_BUS, (function(_this) {
+          return function(event, bus_) {
+            console.log('energy flow, leave bus');
+            bus = null;
+            return fallback_init();
+          };
+        })(this));
+        return $scope.$on("activeChanged", (function(_this) {
+          return function(event, active) {
+            console.log('active changed');
+            if (active === 2) {
+              console.log('getdata');
+              console.log(event);
+              getdata();
+              return auto_refresh();
+            } else {
+              if (refresh_timer) {
+                return $interval.cancel(refresh_timer);
+              }
+            }
+          };
+        })(this));
+      };
+      init();
+      event();
+    }
+
+    return EnergyFlowCtrl2;
+
+  })();
 
   EnergyFlowCtrl = (function() {
-    function EnergyFlowCtrl($scope, $rootScope, $interval, BusData, auth, event1) {
+    function EnergyFlowCtrl($scope1, $rootScope1, $interval1, BusData1, auth1, event1) {
       var self;
-      this.$scope = $scope;
-      this.$rootScope = $rootScope;
-      this.$interval = $interval;
-      this.BusData = BusData;
-      this.auth = auth;
+      this.$scope = $scope1;
+      this.$rootScope = $rootScope1;
+      this.$interval = $interval1;
+      this.BusData = BusData1;
+      this.auth = auth1;
       this.event = event1;
       this.bus = this.$rootScope.bus;
       console.log("Energy flow");
@@ -658,6 +839,7 @@
           console.log('active changed');
           if (active === 2) {
             console.log('getdata');
+            console.log(event);
             self.getdata.apply(self);
             return self.auto_refresh.apply(self);
           } else {
@@ -790,7 +972,7 @@
 
   })();
 
-  angular.module('app').controller('EnergyFlowCtrl3', ['$scope', '$rootScope', '$interval', 'BusData', 'Auth', 'event', EnergyFlowCtrl]);
+  angular.module('app').controller('EnergyFlowCtrl3', ['$scope', '$rootScope', '$interval', 'BusData', 'Auth', 'event', EnergyFlowCtrl2]);
 
 }).call(this);
 
