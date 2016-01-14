@@ -15,10 +15,29 @@ class TreeCtrl
 			@bus = bus
 			@getdata()
 
-	init: ->
+	set_width: ->
+		if @waittimer
+			@$timeout.cancel @waittimer
+			
 		t = document.getElementById("tree")
-		@$timeout ()->
-			t.parentNode.style.width = t.clientWidth + "px"
+		p = t.parentNode
+		console.log "img width:#{t.clientWidth}, parent width:#{p.style.width}"
+		if !t.style.width  or isNaN(parseInt(t.style.width))
+			tw = parseInt t.clientWidth
+			if tw <= 0
+				@waittimer = @$timeout ()=>
+					@set_width()
+				, 10
+			else
+				p.style.width = tw + "px"
+		
+
+	init: ->
+		# @$timeout ()->
+		# 	t.parentNode.style.width = t.clientWidth + "px"
+		# , 10
+		@$timeout ()=>
+			@set_width()
 		, 10
 
 	getdata: ()->

@@ -1171,12 +1171,34 @@
       })(this));
     }
 
-    TreeCtrl.prototype.init = function() {
-      var t;
+    TreeCtrl.prototype.set_width = function() {
+      var p, t, tw;
+      if (this.waittimer) {
+        this.$timeout.cancel(this.waittimer);
+      }
       t = document.getElementById("tree");
-      return this.$timeout(function() {
-        return t.parentNode.style.width = t.clientWidth + "px";
-      }, 10);
+      p = t.parentNode;
+      console.log("img width:" + t.clientWidth + ", parent width:" + p.style.width);
+      if (!t.style.width || isNaN(parseInt(t.style.width))) {
+        tw = parseInt(t.clientWidth);
+        if (tw <= 0) {
+          return this.waittimer = this.$timeout((function(_this) {
+            return function() {
+              return _this.set_width();
+            };
+          })(this), 10);
+        } else {
+          return p.style.width = tw + "px";
+        }
+      }
+    };
+
+    TreeCtrl.prototype.init = function() {
+      return this.$timeout((function(_this) {
+        return function() {
+          return _this.set_width();
+        };
+      })(this), 10);
     };
 
     TreeCtrl.prototype.getdata = function() {

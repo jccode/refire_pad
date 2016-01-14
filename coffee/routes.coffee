@@ -57,7 +57,7 @@ class Config
 
 
 		$urlRouterProvider.otherwise '/app/home'
-		#$urlRouterProvider.otherwise '/app/energy2'
+		#$urlRouterProvider.otherwise '/app/tree'
 
 
 angular.module('app').config ['$stateProvider', '$urlRouterProvider', Config]
