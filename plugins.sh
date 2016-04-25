@@ -7,3 +7,4 @@ ionic plugin add org.apache.cordova.file
 ionic plugin add org.apache.cordova.file-transfer
 ionic plugin add cordova-plugin-geolocation
 ionic plugin add cordova-plugin-whitelist
+ionic plugin add https://github.com/ToniKorin/cordova-plugin-autostart.git

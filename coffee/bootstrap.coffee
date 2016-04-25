@@ -7,6 +7,10 @@ class Bootstrap
 				cordova.plugins.Keyboard.disableScroll true
 			if window.StatusBar
 				StatusBar.styleDefault()
+				
+			# auto start in android
+			if window.cordova and window.cordova.plugins.autoStart
+				cordova.plugins.autoStart.enable()
 
 		# authentication
 		auth_header = (user)->

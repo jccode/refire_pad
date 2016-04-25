@@ -39,7 +39,11 @@
     },
     "org.apache.cordova.file",
     "org.apache.cordova.file-transfer",
-    "cordova-plugin-geolocation"
+    "cordova-plugin-geolocation",
+    {
+      "locator": "https://github.com/ToniKorin/cordova-plugin-autostart.git",
+      "id": "cordova-plugin-autostart"
+    }
   ],
   "cordovaPlatforms": []
 }
