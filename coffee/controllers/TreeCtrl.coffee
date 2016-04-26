@@ -44,8 +44,16 @@ class TreeCtrl
 		@BusData.busdata @bus.bid
 			.then (ret)=>
 				@data = ret.data
-				emission_reduction = @data.EnergySavingData.emission_reduction
+				# emission_reduction = @data.EnergySavingData.emission_reduction
+				# @calc emission_reduction
+				# 
+				# calculate emission reduction by mileage data
+				@totalMileage = @data.MileageData.total
+				emission_reduction = @mileageToEmissionReduction @totalMileage
 				@calc emission_reduction
+
+	mileageToEmissionReduction: (mileage)->
+		mileage / 1000
 
 	calc:(emission_reduction)->
 		# console.log "reduction: #{emission_reduction}, base: #{@BASE}"

@@ -15,7 +15,10 @@
           cordova.plugins.Keyboard.disableScroll(true);
         }
         if (window.StatusBar) {
-          return StatusBar.styleDefault();
+          StatusBar.styleDefault();
+        }
+        if (window.cordova && window.cordova.plugins.autoStart) {
+          return cordova.plugins.autoStart.enable();
         }
       });
       auth_header = function(user) {
@@ -1206,10 +1209,15 @@
         return function(ret) {
           var emission_reduction;
           _this.data = ret.data;
-          emission_reduction = _this.data.EnergySavingData.emission_reduction;
+          _this.totalMileage = _this.data.MileageData.total;
+          emission_reduction = _this.mileageToEmissionReduction(_this.totalMileage);
           return _this.calc(emission_reduction);
         };
       })(this));
+    };
+
+    TreeCtrl.prototype.mileageToEmissionReduction = function(mileage) {
+      return mileage / 1000;
     };
 
     TreeCtrl.prototype.calc = function(emission_reduction) {

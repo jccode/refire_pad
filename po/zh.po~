@@ -13,61 +13,67 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: energy2.html:18
+#: energy2.html:20 energy3.html:7
 msgid "Available Mileage"
 msgstr "剩余里程"
 
-#: energy2.html:36
+#: energy2.html:38 energy3.html:25
 msgid "BATTERY"
 msgstr "动力电池"
 
-#: tree.html:26
+#: tree.html:36
 msgid "compare to a traditional bus"
 msgstr "与传统汽车相比"
 
-#: energy2.html:10
-msgid "Demo data. To view the real data when you take our bus."
-msgstr "模拟数据.乘坐我们的巴士可以查看巴士的真实数据."
+#: tree.html:32
+#, fuzzy
+msgid "Emission reduction"
+msgstr "减排总数"
 
-#: energy2.html:28
+#: energy2.html:30 energy3.html:17
 msgid "FUEL CELL"
 msgstr "燃料电池"
 
-#: application.js:245
+#: application.js:274
 msgid "Goodbye"
 msgstr "再见"
 
-#: tree.html:37
+#: tree.html:53
 msgid "Help us to create a better enviroment for the future of our child"
 msgstr "帮助我们为我们小孩的未来创造一个更好的环境"
 
-#: application.js:246
+#: application.js:275
 msgid "Hoping to see you again!"
 msgstr "希望您再次乘坐我们的汽车"
 
-#: application.js:237
+#: application.js:266
 msgid "Thanks for riding with us!"
 msgstr "感谢您乘坐我们的汽车!"
 
-#: tree.html:18
-msgid "The bus saved"
-msgstr "巴士节省了"
+#: tree.html:21
+msgid "The bus run <br>{{ctrl.totalMileage}} km"
+msgstr ""
 
 #: tree.html:5
 msgid "This Hydrogen Bus Excretes Water"
 msgstr "氢能源汽车排放出水"
 
-#: energy2.html:44
+#: energy2.html:46 energy3.html:33
 msgid "Total Mileage"
 msgstr "总里程"
 
-#: tree.html:22
-msgid "Trees"
-msgstr "树量"
-
-#: application.js:236
+#: application.js:265
 msgid "Welcome"
 msgstr "欢迎"
+
+#~ msgid "Demo data. To view the real data when you take our bus."
+#~ msgstr "模拟数据.乘坐我们的巴士可以查看巴士的真实数据."
+
+#~ msgid "The bus saved"
+#~ msgstr "巴士节省了"
+
+#~ msgid "Trees"
+#~ msgstr "树量"
 
 #~ msgid "1 bus ticket"
 #~ msgstr "1张车票"
@@ -421,9 +427,6 @@ msgstr "欢迎"
 
 #~ msgid "Total Driving Hours"
 #~ msgstr "总驾驶时间"
-
-#~ msgid "Total emission reduction"
-#~ msgstr "减排总数"
 
 #~ msgid "Total Emission Reduction"
 #~ msgstr "减排总数"

@@ -4,58 +4,58 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: energy2.html:18
+#: energy2.html:20
+#: energy3.html:7
 msgid "Available Mileage"
 msgstr ""
 
-#: energy2.html:36
+#: energy2.html:38
+#: energy3.html:25
 msgid "BATTERY"
 msgstr ""
 
-#: tree.html:28
+#: tree.html:37
 msgid "compare to a traditional bus"
 msgstr ""
 
-#: energy2.html:10
-msgid "Demo data. To view the real data when you take our bus."
+#: tree.html:33
+msgid "Emission reduction"
 msgstr ""
 
-#: energy2.html:28
+#: energy2.html:30
+#: energy3.html:17
 msgid "FUEL CELL"
 msgstr ""
 
-#: application.js:261
+#: application.js:274
 msgid "Goodbye"
 msgstr ""
 
-#: tree.html:45
+#: tree.html:54
 msgid "Help us to create a better enviroment for the future of our child"
 msgstr ""
 
-#: application.js:262
+#: application.js:275
 msgid "Hoping to see you again!"
 msgstr ""
 
-#: application.js:253
+#: application.js:266
 msgid "Thanks for riding with us!"
 msgstr ""
 
-#: tree.html:20
-msgid "The bus saved"
+#: tree.html:21
+msgid "The bus run"
 msgstr ""
 
 #: tree.html:5
 msgid "This Hydrogen Bus Excretes Water"
 msgstr ""
 
-#: energy2.html:44
+#: energy2.html:46
+#: energy3.html:33
 msgid "Total Mileage"
 msgstr ""
 
-#: tree.html:24
-msgid "Trees"
-msgstr ""
-
-#: application.js:252
+#: application.js:265
 msgid "Welcome"
 msgstr ""

@@ -37,14 +37,14 @@
                     float: left;
 
                     .text {
-                        left: -10%;
+                        left: -25%;
                     }
                 }
                 &:last-child {
                     float: right;
 
                     .text {
-                        right: -10%;
+                        right: -40%;
                     }
                 }
 
@@ -59,6 +59,7 @@
                     color: #fff;
                     font-weight: bold;
                     whitespace: nowrap;
+                    text-align: center;
 
                     p {
                         margin: 0;
