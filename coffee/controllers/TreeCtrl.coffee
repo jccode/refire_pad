@@ -52,8 +52,10 @@ class TreeCtrl
 				emission_reduction = @mileageToEmissionReduction @totalMileage
 				@calc emission_reduction
 
+	# 100km 油耗 26L
+	# 1L 汽油减排: 2.3kg 二氧化碳; 0.627kg 碳.
 	mileageToEmissionReduction: (mileage)->
-		mileage / 1000
+		(mileage / 100) * 26 * 0.627
 
 	calc:(emission_reduction)->
 		# console.log "reduction: #{emission_reduction}, base: #{@BASE}"

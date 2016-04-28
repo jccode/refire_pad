@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Refire\n"
-"PO-Revision-Date: 2016-04-26 10:28+0800\n"
+"PO-Revision-Date: 2016-04-29 00:38+0800\n"
 "Last-Translator: jessie <jessie.chen@hongdingltd.com>\n"
 "Language-Team: jessie <jessie.chen@hongdingltd.com>\n"
 "Language: zh\n"
@@ -27,7 +27,7 @@ msgstr "与传统汽车相比"
 
 #: tree.html:33
 msgid "Emission reduction"
-msgstr "减少碳排放"
+msgstr "碳排放减少"
 
 #: energy2.html:30 energy3.html:17
 msgid "FUEL CELL"
