@@ -3,6 +3,10 @@ class TreeCtrl
 	constructor: (@$scope, @$rootScope, @$timeout, @BusData, @auth, @event)->
 		@bus = @$rootScope.bus
 		@BASE = 100				# base number
+		
+		@$scope.totalMileage = 0
+		@$scope.tree = 0
+		
 		@init()
 		if @bus and @bus.bid and @auth.isLoggedIn()
 			@getdata()
@@ -21,7 +25,7 @@ class TreeCtrl
 			
 		t = document.getElementById("tree")
 		p = t.parentNode
-		console.log "img width:#{t.clientWidth}, parent width:#{p.style.width}"
+		# console.log "img width:#{t.clientWidth}, parent width:#{p.style.width}"
 		if !t.style.width  or isNaN(parseInt(t.style.width))
 			tw = parseInt t.clientWidth
 			if tw <= 0
@@ -44,12 +48,13 @@ class TreeCtrl
 		@BusData.busdata @bus.bid
 			.then (ret)=>
 				@data = ret.data
+
 				# emission_reduction = @data.EnergySavingData.emission_reduction
 				# @calc emission_reduction
 				# 
 				# calculate emission reduction by mileage data
-				@totalMileage = @data.MileageData.total
-				emission_reduction = @mileageToEmissionReduction @totalMileage
+				@$scope.totalMileage = @data.MileageData.total
+				emission_reduction = @mileageToEmissionReduction @$scope.totalMileage
 				@calc emission_reduction
 
 	# 100km 油耗 26L

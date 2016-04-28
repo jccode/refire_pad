@@ -1155,6 +1155,8 @@
       this.event = event1;
       this.bus = this.$rootScope.bus;
       this.BASE = 100;
+      this.$scope.totalMileage = 0;
+      this.$scope.tree = 0;
       this.init();
       if (this.bus && this.bus.bid && this.auth.isLoggedIn()) {
         this.getdata();
@@ -1181,7 +1183,6 @@
       }
       t = document.getElementById("tree");
       p = t.parentNode;
-      console.log("img width:" + t.clientWidth + ", parent width:" + p.style.width);
       if (!t.style.width || isNaN(parseInt(t.style.width))) {
         tw = parseInt(t.clientWidth);
         if (tw <= 0) {
@@ -1209,15 +1210,15 @@
         return function(ret) {
           var emission_reduction;
           _this.data = ret.data;
-          _this.totalMileage = _this.data.MileageData.total;
-          emission_reduction = _this.mileageToEmissionReduction(_this.totalMileage);
+          _this.$scope.totalMileage = _this.data.MileageData.total;
+          emission_reduction = _this.mileageToEmissionReduction(_this.$scope.totalMileage);
           return _this.calc(emission_reduction);
         };
       })(this));
     };
 
     TreeCtrl.prototype.mileageToEmissionReduction = function(mileage) {
-      return mileage / 1000;
+      return (mileage / 100) * 26 * 0.627;
     };
 
     TreeCtrl.prototype.calc = function(emission_reduction) {
