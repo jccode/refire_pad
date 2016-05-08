@@ -991,12 +991,8 @@
       this.DELAY = 10;
       this.active = 0;
       this.video1 = document.getElementById("video1");
-      this.video2 = document.getElementById("video2");
-      this.video3 = document.getElementById("video3");
       this.sections = document.getElementsByClassName("section");
       this.video1.addEventListener('ended', this.video_end_listener.bind(this), false);
-      this.video2.addEventListener('ended', this.video_end_listener.bind(this), false);
-      this.video3.addEventListener('ended', this.video_end_listener.bind(this), false);
       this.active_handler(this.active);
     }
 
@@ -1005,7 +1001,7 @@
     };
 
     HomeCtrl.prototype.incr_active = function() {
-      this.active = (this.active + 1) % 6;
+      this.active = (this.active + 1) % 2;
       this.$scope.$apply();
       this.active_handler(this.active);
       return this.$scope.$broadcast('activeChanged', this.active);
@@ -1016,14 +1012,6 @@
         case 0:
           return this.play_video(this.video1);
         case 1:
-          return this.play_video(this.video2);
-        case 2:
-          return this.delay_and_next();
-        case 3:
-          return this.play_video(this.video3);
-        case 4:
-          return this.delay_and_next();
-        case 5:
           return this.delay_and_next();
         default:
           return console.log('fuck. Should not in here.');

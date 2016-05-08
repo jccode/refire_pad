@@ -4,14 +4,13 @@ class HomeCtrl
 		@DELAY = 10				# 20
 		@active = 0
 		@video1 = document.getElementById "video1"
-		@video2 = document.getElementById "video2"
-		@video3 = document.getElementById "video3"
+		# @video2 = document.getElementById "video2"
+		# @video3 = document.getElementById "video3"
 		@sections = document.getElementsByClassName "section"
-		# @width = @$window.screen.width + "px" 
 
 		@video1.addEventListener 'ended', @video_end_listener.bind(@), false
-		@video2.addEventListener 'ended', @video_end_listener.bind(@), false
-		@video3.addEventListener 'ended', @video_end_listener.bind(@), false
+		# @video2.addEventListener 'ended', @video_end_listener.bind(@), false
+		# @video3.addEventListener 'ended', @video_end_listener.bind(@), false
 
 		@active_handler(@active)
 
@@ -19,7 +18,7 @@ class HomeCtrl
 		@incr_active()
 
 	incr_active: ()->
-		@active = (@active + 1) % 6
+		@active = (@active + 1) % 2
 		
 		@$scope.$apply()
 		@active_handler @active
@@ -28,11 +27,11 @@ class HomeCtrl
 	active_handler: (idx)->
 		switch idx
 			when 0 then @play_video(@video1)
-			when 1 then @play_video(@video2)
-			when 2 then @delay_and_next()
-			when 3 then @play_video(@video3)
-			when 4 then @delay_and_next()
-			when 5 then @delay_and_next()
+			when 1 then @delay_and_next()
+			# when 2 then @delay_and_next()
+			# when 3 then @play_video(@video3)
+			# when 4 then @delay_and_next()
+			# when 5 then @delay_and_next()
 			else console.log 'fuck. Should not in here.'
 
 	delay_and_next: ()->

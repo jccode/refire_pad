@@ -6,34 +6,46 @@
         </div>
          -->
 
-        <div class="section video-player"  data-tap-disabled="true" ng-show="ctrl.active==0"> <!--  -->
+        <!-- 
+        <div class="section video-player"  data-tap-disabled="true" ng-show="ctrl.active==0">
             <video id="video1" controls >
                 <source src="img/video/energyflow_hd.mp4" type="video/mp4"/>
             </video>
         </div>
 
-        <div class="section video-player" data-tap-disabled="true" ng-show="ctrl.active==1"> <!--  -->
-            <video id="video2" controls > <!-- ng-show="ctrl.active==1" -->
+        <div class="section video-player" data-tap-disabled="true" ng-show="ctrl.active==1"> 
+            <video id="video2" controls >
                 <source src="img/video/fuelcell_hd.mp4" type="video/mp4"/>
             </video>
         </div>
 
-        <div class="section energy-flow" ng-show="ctrl.active==2"> <!--  -->
+        <div class="section energy-flow" ng-show="ctrl.active==2">
             <div ng-include src="'templates/energy3.html'"></div>
         </div>
 
-        <div class="section video-player"  data-tap-disabled="true" ng-show="ctrl.active==3"> <!--  -->
+        <div class="section video-player"  data-tap-disabled="true" ng-show="ctrl.active==3">
             <video id="video3" controls >
                 <source src="img/video/zero_emission_hd.mp4" type="video/mp4"/>
             </video>
         </div>
 
-        <div class="section tree" id="tree-section" ng-show="ctrl.active==4"> <!--   -->
+        <div class="section tree" id="tree-section" ng-show="ctrl.active==4">
             <div ng-include src="'templates/tree.html'"></div>
         </div>
 
-        <div class="section qrcode" ng-show="ctrl.active==5"> <!--  -->
+        <div class="section qrcode" ng-show="ctrl.active==5">
             <img src="img/QR-page.png" alt="" width="100%" />
+        </div>
+        -->
+
+        <div class="section video-player"  data-tap-disabled="true" ng-show="ctrl.active==0">
+            <video id="video1" controls >
+                <source src="img/video/vancouver_hd.mp4" type="video/mp4"/>
+            </video>
+        </div>
+        
+        <div class="section tree" id="tree-section" ng-show="ctrl.active==1">
+            <div ng-include src="'templates/tree.html'"></div>
         </div>
         
     </ion-content>
