@@ -6,19 +6,19 @@ class HomeCtrl
 		@video1 = document.getElementById "video1"
 		# @video2 = document.getElementById "video2"
 		# @video3 = document.getElementById "video3"
-		@sections = document.getElementsByClassName "section"
+		# @sections = document.getElementsByClassName "section"
 
-		@video1.addEventListener 'ended', @video_end_listener.bind(@), false
+		# @video1.addEventListener 'ended', @video_end_listener.bind(@), false
 		# @video2.addEventListener 'ended', @video_end_listener.bind(@), false
 		# @video3.addEventListener 'ended', @video_end_listener.bind(@), false
 
-		@active_handler(@active)
+		# @active_handler(@active)
 
 	video_end_listener: ()->
 		@incr_active()
 
 	incr_active: ()->
-		@active = (@active + 1) % 2
+		@active = (@active + 1) % 1
 		
 		@$scope.$apply()
 		@active_handler @active

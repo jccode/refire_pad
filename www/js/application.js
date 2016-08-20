@@ -376,8 +376,12 @@
             templateUrl: 'templates/energy3.html'
           }
         }
+      }).state('home', {
+        url: '/home',
+        templateUrl: 'templates/home.html',
+        controller: 'HomeCtrl as ctrl'
       });
-      $urlRouterProvider.otherwise('/app/home');
+      $urlRouterProvider.otherwise('/home');
     }
 
     return Config;
@@ -991,9 +995,6 @@
       this.DELAY = 10;
       this.active = 0;
       this.video1 = document.getElementById("video1");
-      this.sections = document.getElementsByClassName("section");
-      this.video1.addEventListener('ended', this.video_end_listener.bind(this), false);
-      this.active_handler(this.active);
     }
 
     HomeCtrl.prototype.video_end_listener = function() {
@@ -1001,7 +1002,7 @@
     };
 
     HomeCtrl.prototype.incr_active = function() {
-      this.active = (this.active + 1) % 2;
+      this.active = (this.active + 1) % 1;
       this.$scope.$apply();
       this.active_handler(this.active);
       return this.$scope.$broadcast('activeChanged', this.active);

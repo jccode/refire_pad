@@ -54,10 +54,16 @@ class Config
 					'menuContent':
 						templateUrl: 'templates/energy3.html'
 
+			# For single root
+			.state 'home',
+				url: '/home'
+				templateUrl: 'templates/home.html'
+				controller: 'HomeCtrl as ctrl'
 
 
-		$urlRouterProvider.otherwise '/app/home'
-		#$urlRouterProvider.otherwise '/app/tree'
+
+		#$urlRouterProvider.otherwise '/app/home'
+		$urlRouterProvider.otherwise '/home'
 
 
 angular.module('app').config ['$stateProvider', '$urlRouterProvider', Config]
